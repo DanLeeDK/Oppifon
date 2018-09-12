@@ -3,6 +3,9 @@ nav {
   border: 3px solid #f1f1f1;
 }
 
+form {
+  float: right;
+}
 
 /* Full-width inputs */
 input[type=text], input[type=password] {
@@ -41,6 +44,6 @@ span.psw {
 @media screen and (max-width: 300px) {
   span.psw {
       display: block;
-      float: none;
+      float: right;
   }
 }
