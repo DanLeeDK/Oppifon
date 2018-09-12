@@ -7,6 +7,9 @@ import { LoginComponent } from './login/login.component';
 import { UserHomeComponent } from './user-home/user-home.component';
 
 import { AppRoutingModule } from './/app-routing.module';
+import { SignUpComponent } from './sign-up/sign-up.component';
+import { ExpertProfileComponent } from './expert-profile/expert-profile.component';
+import { SearchComponent } from './search/search.component';
 
 
 
@@ -14,7 +17,10 @@ import { AppRoutingModule } from './/app-routing.module';
   declarations: [
     AppComponent,
     LoginComponent,
-    UserHomeComponent
+    UserHomeComponent,
+    SignUpComponent,
+    ExpertProfileComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,
