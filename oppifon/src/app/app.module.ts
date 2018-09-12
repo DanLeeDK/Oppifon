@@ -7,6 +7,8 @@ import { LoginComponent } from './login/login.component';
 import { UserHomeComponent } from './user-home/user-home.component';
 
 import { AppRoutingModule } from './/app-routing.module';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
 
 
 
@@ -14,7 +16,9 @@ import { AppRoutingModule } from './/app-routing.module';
   declarations: [
     AppComponent,
     LoginComponent,
-    UserHomeComponent
+    UserHomeComponent,
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
