@@ -7,14 +7,11 @@ import { LoginComponent } from './login/login.component';
 import { UserHomeComponent } from './user-home/user-home.component';
 
 import { AppRoutingModule } from './/app-routing.module';
-<<<<<<< HEAD
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
-=======
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { ExpertProfileComponent } from './expert-profile/expert-profile.component';
 import { SearchComponent } from './search/search.component';
->>>>>>> 779fdb7331738f59f7206ead761798c5fe7f241c
 
 
 
@@ -23,14 +20,11 @@ import { SearchComponent } from './search/search.component';
     AppComponent,
     LoginComponent,
     UserHomeComponent,
-<<<<<<< HEAD
     HeaderComponent,
-    FooterComponent
-=======
+    FooterComponent,
     SignUpComponent,
     ExpertProfileComponent,
     SearchComponent
->>>>>>> 779fdb7331738f59f7206ead761798c5fe7f241c
   ],
   imports: [
     BrowserModule,
