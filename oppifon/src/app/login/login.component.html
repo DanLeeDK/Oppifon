@@ -1,4 +1,4 @@
-<div>
+<div class="container">
   <h1>{{title}}</h1>
   <p>
     Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aliquam in lorem sit amet leo accumsan lacinia. Aenean placerat.
@@ -8,10 +8,42 @@
     non leo. Phasellus enim erat, vestibulum vel, aliquam a, posuere eu, velit. Donec ipsum massa, ullamcorper in, auctor
     et, scelerisque sed, est. Praesent vitae arcu tempor neque lacinia pretium. Praesent dapibus. Aliquam erat volutpat.
   </p>
-  <button type="button" class="btn btn-success shadow" (click)="onClickMe()">Sign up</button>
+  <a href="#" mdbBtn color="success" class="waves-light" mdbWavesEffect>Sign up</a>
 </div>
 
-<div>
+<div class="center">
+  <h1>Experts</h1>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4" *ngFor="let profile of profiles">
+        <!--Carousel Wrapper-->
+        <mdb-carousel [isControls]="true" class="carousel-multi-item multi-animation" [type]="'carousel-multi-item'" [animation]="'slide'">
+          <div id="carousel">
+            <!--First slide-->
+            <div *ngFor="let profile of profiles">
+              <mdb-carousel-item>
+                <div>
+                  <mdb-card>
+                    <mdb-card-img id="expertImg" src={{profile}} alt="Card image cap"></mdb-card-img>
+                    <mdb-card-body>
+                      <mdb-card-title>
+                        <h4>Card title</h4>
+                      </mdb-card-title>
+                      <p>"I'm extremly clever and talented. I can show you the world. Trust me and you will peace"</p>
+                      <a href="#" mdbBtn color="primary" class="waves-light" mdbWavesEffect>Read more</a>
+                      <br/>
+                    </mdb-card-body>
+                  </mdb-card>
+                </div>
+              </mdb-carousel-item>
+            </div>
+          </div>
+          <!--/ slides -->
+        </mdb-carousel>
+        <!--/.Carousel Wrapper-->
+      </div>
+      <a href="/search" mdbBtn color="default" class="waves-light" mdbWavesEffect>Search expert</a>
+    </div>
 
+  </div>
 </div>
-<button class="btn btn-danger shadow" (click)="onClickMe()">Click me!</button>
