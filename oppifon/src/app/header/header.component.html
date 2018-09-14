@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-dark bg-dark">
 
   <!-- logo -->
   <div class="navbar-brand">
@@ -7,22 +7,23 @@
     </a>
     <h1>Oppifon</h1>
   </div>
-  <form action="" >
+  <form action="" class="login">
     <div class="container">
       <div class="row">
-        <label for="uname"><b>Email</b></label>
-        <input type="text" placeholder="Email" name="email" required>
-
-        <label for="psw"><b>Password</b></label>
-        <input type="password" placeholder="Enter Password" name="psw" required>
-
+        <div class="column">
+          <label for="uname"><b>Email</b></label>
+          <input type="text" placeholder="Email" name="email" required>
+        </div>
+        <div class="column">
+          <label for="psw"><b>Password</b></label>
+          <input type="password" placeholder="Enter Password" name="psw" required>
+        </div>
       </div>
+      <a href="/userhome" mdbBtn color="success" class="waves-light" mdbWavesEffect>Login</a>
+      <input type="checkbox" name="remember"><label>Remember me</label>
 
-      <button class="btn btn-success" type="submit">Login</button>
-      <input type="checkbox" name="remember"> Remember me
 
-
-      <span class="psw">Forgot <a href="#">password?</a></span>
+      <label style="float: right" class="psw">Forgot <a href="#">password?</a></label>
     </div>
 
     <div class="container">
