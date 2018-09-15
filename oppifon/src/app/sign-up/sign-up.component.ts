@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
-  styleUrls: ['./sign-up.component.scss']
+  styleUrls: ['./sign-up.component.scss'],
+  providers: [NgbCarouselConfig]  // add NgbCarouselConfig to the component providers
 })
 
 export class SignUpComponent implements OnInit {
@@ -20,7 +22,6 @@ export class SignUpComponent implements OnInit {
     this.showWhatAreYou = false;
     this.showAreYouAnExpert = false;
     this.showExpertCategories = false;
-    this.test = "sdfasdf"
   }
 
   public showWhoAreYouClick(){
@@ -35,8 +36,6 @@ export class SignUpComponent implements OnInit {
     this.showWhatAreYou = true;
     this.showAreYouAnExpert = false;
     this.showExpertCategories = false;
-    this.test = "CLICK";
-    console.log("click");
   }
 
   public showAreYouAnExpertClick(){
