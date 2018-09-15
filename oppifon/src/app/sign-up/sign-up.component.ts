@@ -1,54 +1,26 @@
 import { Component, OnInit } from '@angular/core';
-import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
-  styleUrls: ['./sign-up.component.scss'],
-  providers: [NgbCarouselConfig]  // add NgbCarouselConfig to the component providers
+  styleUrls: ['./sign-up.component.scss']
 })
 
 export class SignUpComponent implements OnInit {
-  public showWhoAreYou;
-  public showWhatAreYou;
-  public showAreYouAnExpert;
-  public showExpertCategories;
-  public test;
-
+  private _firstName;
+  private _lastName;
+  private _email;
+  private _password;
   constructor() { }
 
   ngOnInit() {
-    this.showWhoAreYou = true;
-    this.showWhatAreYou = false;
-    this.showAreYouAnExpert = false;
-    this.showExpertCategories = false;
+   
   }
-
-  public showWhoAreYouClick(){
-    this.showWhoAreYou = true;
-    this.showWhatAreYou = false;
-    this.showAreYouAnExpert = false;
-    this.showExpertCategories = false;
-  }
-
-  public showWhatAreYouClick(){
-    this.showWhoAreYou = false;
-    this.showWhatAreYou = true;
-    this.showAreYouAnExpert = false;
-    this.showExpertCategories = false;
-  }
-
-  public showAreYouAnExpertClick(){
-    this.showWhoAreYou = false;
-    this.showWhatAreYou = false;
-    this.showAreYouAnExpert = true;
-    this.showExpertCategories = false;
-  }
-
-  public showExpertCategorysClick(){
-    this.showWhoAreYou = false;
-    this.showWhatAreYou = false;
-    this.showAreYouAnExpert = false;
-    this.showExpertCategories = true;
+  public whoAreYouClick(firstName, lastName, email, password){
+    this._firstName = firstName;
+    this._lastName = lastName;
+    this._email = email;
+    this._password = password;
+    console.log(`${firstName}`);
   }
 }
