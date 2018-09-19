@@ -26,7 +26,7 @@
 
   <!-- Carousel-->
   <div id="carousel" class="carousel slide" data-ride="carousel" data-interval=false>
-    <div class="carousel-inner" style=" width:100%; height: 500px !important;">
+    <div class="carousel-inner">
       <!-- Who are you card-->
       <div class="carousel-item active">
         <div class="row justify-content-center">
@@ -58,7 +58,7 @@
         </div>
       </div>
       <!-- What are you card-->
-      <div class="carousel-item" style=" width:100%; height: 500px !important;">
+      <div class="carousel-item">
         <div class="row justify-content-center">
           <div class="card bg-white mb-3 shadow-sm" style="max-width: 18rem;">
             <div class="card-body text-left">
@@ -104,7 +104,7 @@
         </div>
       </div>
       <!-- Are you an expert -->
-      <div class="carousel-item" style=" width:100%; height: 500px !important;">
+      <div class="carousel-item">
         <div class="row justify-content-center">
           <div class="card bg-white mb-3 shadow-sm" style="max-width: 18rem;">
             <div class="card-body text-left">
@@ -125,6 +125,33 @@
               <div class="d-flex flex-row-reverse">
                 <button class="btn btn-primary" data-target="#carousel" data-slide="next">Next</button>
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- I am expert -->
+      <div class="carousel-item">
+        <div class="row justify-content-center">
+          <div class="card bg-white mb-3 shadow-sm" style="max-width: 18rem;">
+            <div class="card-body text-left">
+              <h5 class="card-title">What kind of expert are you</h5>
+
+              <div class="form-group">
+                <input type="string" class="form-control" name="expertCategory" placeholder="Category">
+              </div>
+              <div class="form-group">
+                <input type="string" class="form-control" name="expertSubCategory" placeholder="Sub category">
+              </div>
+
+              <div class="form-group">
+                <textarea id="description" class="form-control" placeholder="Type a description about your self"></textarea>
+              </div>
+
+              <div class="d-flex flex-row-reverse">
+                <button class="btn btn-primary" data-target="#carousel" data-slide="next">Next</button>
+              </div>
+
             </div>
           </div>
         </div>
