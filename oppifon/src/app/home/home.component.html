@@ -1,0 +1,36 @@
+<div class="center">
+  <h1>Experts</h1>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4" *ngFor="let profile of profiles">
+        <!--Carousel Wrapper-->
+        <mdb-carousel [isControls]="true" class="carousel-multi-item multi-animation" [type]="'carousel-multi-item'" [animation]="'slide'">
+          <div id="carousel">
+            <!--First slide-->
+            <div *ngFor="let profile of profiles">
+              <mdb-carousel-item>
+                <div>
+                  <mdb-card>
+                    <mdb-card-img href="/expertprofile" src={{profile}} alt="Card image cap"></mdb-card-img>
+                    <mdb-card-body>
+                      <mdb-card-title>
+                        <h4>Card title</h4>
+                      </mdb-card-title>
+                      <p>Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                      <a href="#" mdbBtn color="primary" class="waves-light" mdbWavesEffect>Read more</a>
+                    </mdb-card-body>
+                  </mdb-card>
+                </div>
+              </mdb-carousel-item>
+            </div>
+          </div>
+          <!--/ slides -->
+        </mdb-carousel>
+        <!--/.Carousel Wrapper-->
+      </div>
+    </div>
+  </div>
+  <div>
+    <a href="/search" mdbBtn color="default" class="waves-light" mdbWavesEffect>Search expert</a>
+  </div>
+</div>
