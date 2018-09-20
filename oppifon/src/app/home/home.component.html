@@ -29,8 +29,66 @@
         <!--/.Carousel Wrapper-->
       </div>
     </div>
-  </div>
-  <div>
-    <a href="/search" mdbBtn color="default" class="waves-light" mdbWavesEffect>Search expert</a>
+
+
+    <!--Navbar with Search button and Calender button-->
+    <nav id="buttonNavbar" class="navbar navbar-light cyan darken-3 lighten-4 mb-4">
+
+      <!-- Search button -->
+      <button type="button" (click)="searchClick()" class="btn btn-mdb-color"><i class="fa fa-search mr-1"></i>
+        Search expert</button>
+
+      <!-- Calender button -->
+      <button type="button" (click)="calendarClick()" class="btn btn-mdb-color"><i class="fa fa-calendar mr-1"></i> Calendar</button>
+
+    </nav>
+    <!--/.Navbar-->
+
+    <div id="feedbox" class="row">
+
+      <!--Appointment column-->
+      <div class="col-3 container-fluid block-example border border-primary rounded-left">
+        <div class="row" id="label">
+          <h3 id="post">Appointments</h3>
+        </div>
+
+        <div *ngFor="let appointment of appointments">
+          <div class="row block-example border-bottom container-fluid border-primary">
+            <h5 id="post">{{appointment}}</h5>
+          </div>
+        </div>
+      </div>
+      <!--/.Appointment column-->
+
+      <!--Feed column-->
+      <div class="col-6 container-fluid block-example border border-primary">
+        <div id="label" class="row ">
+          <h3 id="post">News feed</h3>
+        </div>
+
+        <div *ngFor="let appointment of appointments">
+          <div id="label" class="row block-example border-bottom container-fluid border-primary">
+            <h5 id="post">{{appointment}}</h5>
+          </div>
+        </div>
+      </div>
+      <!--/.Feed column-->
+
+      <!--Subscriber column-->
+      <div class="col-3 container-fluid block-example border border-primary rounded-right">
+        <div id="label" class="row">
+          <h3 id="post">Subscribtions</h3>
+        </div>
+
+        <div *ngFor="let appointment of appointments">
+          <div id="label" class="row block-example border-bottom container-fluid border-primary">
+            <h5 id="post">{{appointment}}</h5>
+          </div>
+        </div>
+      </div>
+      <!--/.Subscriber column-->
+
+    </div>
+
   </div>
 </div>

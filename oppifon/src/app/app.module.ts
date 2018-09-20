@@ -13,6 +13,7 @@ import { FooterComponent } from './footer/footer.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { ExpertProfileComponent } from './expert-profile/expert-profile.component';
 import { SearchComponent } from './search/search.component';
+import { CalendarComponent } from './calendar/calendar.component';
 
 
 
@@ -25,7 +26,8 @@ import { SearchComponent } from './search/search.component';
     FooterComponent,
     SignUpComponent,
     ExpertProfileComponent,
-    SearchComponent
+    SearchComponent,
+    CalendarComponent
   ],
   imports: [
     MDBBootstrapModule.forRoot(),

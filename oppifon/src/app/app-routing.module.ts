@@ -1,3 +1,4 @@
+import { CalendarComponent } from './calendar/calendar.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
@@ -10,8 +11,9 @@ import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
-  { path: 'userhome', component: HomeComponent},
+  { path: 'home', component: HomeComponent},
   { path: 'signup', component: SignUpComponent },
+  { path: 'calendar', component: CalendarComponent },
   { path: 'search', component: SearchComponent },
   { path: 'expert', component: ExpertProfileComponent},
   { path: '', redirectTo: 'login', pathMatch: 'full'}
