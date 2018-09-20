@@ -33,26 +33,46 @@
           <div class="card bg-white mb-3 shadow-sm" style="max-width: 18rem;">
             <div class="card-body text-left">
               <h5 class="card-title">Who are you?</h5>
-              <div class="form-group">
-                <input type="text" class="form-control" name="firstName" placeholder="First name">
-              </div>
-              <div class="form-group">
-                <input type="text" class="form-control" name="lastName" placeholder="Last name">
-              </div>
-              <div class="form-group">
-                <input type="email" class="form-control" name="email" placeholder="Email">
-              </div>
-              <div class="form-group">
-                <input type="password" class="form-control" name="password" placeholder="Password">
-              </div>
-              <div class="form-group">
-                <input type="password" class="form-control" name="confirmPassword" placeholder="Confirm password">
-              </div>
-              <div class="form-group">
-                <div class="d-flex flex-row-reverse">
-                  <button class="btn btn-primary" data-target="#carousel" data-slide="next">Next</button>
+              <form [formGroup]="whoAreYouForm" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                  <input type="text" class="form-control" formControlName="firstName" placeholder="First name">
+                  <div *ngIf="whoAreYouSubmit && f.firstName.invalid && (f.firstName.dirty || f.firstName.touched)" class="alert alert-danger">
+                      First Name is required
+                  </div>
                 </div>
-              </div>
+                <div class="form-group">
+                  <input type="text" class="form-control" formControlName="lastName" placeholder="Last name">
+                  <div *ngIf="whoAreYouSubmit && f.lastName.invalid && (f.lastName.dirty || f.lastName.touched)" class="alert alert-danger">
+                      Last Name is required
+                  </div>
+                </div>
+                <div class="form-group">
+                  <input type="email" class="form-control" formControlName="email" placeholder="Email">
+                  <div *ngIf="whoAreYouSubmit && f.email.invalid && (f.email.dirty || f.email.touched)" class="alert alert-danger">
+                      <div *ngIf="f.email.errors.required">Email is required</div>
+                      <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+                  </div>
+                </div>
+               <div class="form-group">
+                  <input type="password" class="form-control" formControlName="password" placeholder="Password">
+                  <div *ngIf="whoAreYouSubmit && f.password.invalid && (f.password.dirty || f.password.touched)" class="alert alert-danger">
+                    <div *ngIf="f.password.errors.required">Password is required</div>
+                    <div *ngIf="f.password.errors.minlength">Password must be at least 8 characters</div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <input type="whoAreYouSubmit && password" class="form-control" formControlName="confirmPassword" placeholder="Confirm password">
+                  <div *ngIf="f.confirmPassword.errors?.MatchPassword && (f.confirmPassword.dirty || f.confirmPassword.touched)" class="alert alert-danger">
+                      Passwords must match
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="d-flex flex-row-reverse">
+                    <button class="btn btn-primary" >Next</button>
+                    <!-- data-target="#carousel" data-slide="next" -->
+                  </div>
+                </div>
+              </form>
             </div>
           </div>
         </div>
@@ -63,6 +83,9 @@
           <div class="card bg-white mb-3 shadow-sm" style="max-width: 18rem;">
             <div class="card-body text-left">
               <h5 class="card-title">Who are you?</h5>
+              <div class="form-group">
+                <input type="string" class="form-control" name="city" placeholder="City">
+              </div>
               <div class="form-group">
                 <input type="string" class="form-control" name="phoneNumber" placeholder="Phone number">
               </div>
@@ -113,14 +136,18 @@
               <div class="form-group">
                 <div class="form-check form-check-inline">
                   <label class="form-check-label">
-                    <input type="radio" class="form-check-input" name="expert" value="true"> Yes, create my page
+                    <input type="radio" name="AreYouAnExpert" [value]=false class="form-check-input" [(ngModel)]="expert ">
+                    No, skip
                   </label>
                 </div>
+
                 <div class="form-check form-check-inline">
                   <label class="form-check-label">
-                    <input type="radio" class="form-check-input" name="expert" value="false"> No, skip
+                    <input type="radio" name="AreYouAnExpert" [value]=true class="form-check-input" [(ngModel)]="expert">
+                    Yes, create my page
                   </label>
                 </div>
+
               </div>
               <div class="d-flex flex-row-reverse">
                 <button class="btn btn-primary" data-target="#carousel" data-slide="next">Next</button>
@@ -129,9 +156,9 @@
           </div>
         </div>
       </div>
-      
+
       <!-- I am expert -->
-      <div class="carousel-item">
+      <div *ngIf="expert" class="carousel-item">
         <div class="row justify-content-center">
           <div class="card bg-white mb-3 shadow-sm" style="max-width: 18rem;">
             <div class="card-body text-left">
@@ -150,6 +177,21 @@
 
               <div class="d-flex flex-row-reverse">
                 <button class="btn btn-primary" data-target="#carousel" data-slide="next">Next</button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- I am expert -->
+      <div class="carousel-item">
+        <div class="row justify-content-center">
+          <div class="card bg-white mb-3 shadow-sm" style="max-width: 18rem;">
+            <div class="card-body text-left">
+              <h5 class="card-title">Submit</h5>
+
+              <div class="d-flex flex-row-reverse">
+                <a href="/" class="btn btn-success">Submit</a>
               </div>
 
             </div>
