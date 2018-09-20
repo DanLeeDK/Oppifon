@@ -45,7 +45,7 @@ export class SignUpComponent implements OnInit {
       this.user.lastName = this.whoAreYouForm.controls['lastName'].value;
       this.user.email = this.whoAreYouForm.controls['email'].value;
       this.user.password = this.whoAreYouForm.controls['password'].value;  
-      
+      console.log(this.carousel)
     }
     
     console.log(this.user)
