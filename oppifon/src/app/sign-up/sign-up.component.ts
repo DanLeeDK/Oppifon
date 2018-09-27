@@ -39,8 +39,13 @@ export class SignUpComponent implements OnInit {
 
   public addCategory(){
     let category = this.whoAreYouForm.controls["category"].value;
-    console.log(category);
     this.categories.unshift(category);
+  }
+
+  public removeCategory(categoryToRemove: string){
+    let category = this.categories.find(x => x === categoryToRemove);
+    let index = this.categories.indexOf(category);
+    this.categories.splice(index, 1);
   }
 
   public onSubmit(){

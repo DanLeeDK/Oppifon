@@ -77,7 +77,10 @@
 
           <!-- Labels -->
           <div class="form-group">
-            <span *ngFor="let category of categories" class="badge badge-info">{{category}}<button>X</button></span>
+            <span *ngFor="let category of categories" class="badge badge-info">
+              {{category}}
+              <button type="button" class="btn btn-danger btn-sm" (click)="removeCategory(category)">X</button>
+            </span>
             
             <div class="d-flex flex-row-reverse">
                 <button class="btn btn-success" type="button" (click)="addCategory()">Add category</button>
