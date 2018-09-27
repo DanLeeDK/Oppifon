@@ -2,8 +2,6 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { UserSignUp } from './user-sign-up';
 import { PasswordValidation } from './validation';
-import { $ } from 'protractor';
-
 
 @Component({
   selector: 'app-sign-up',
@@ -55,7 +53,7 @@ export class SignUpComponent implements OnInit {
       this.user.lastName = this.whoAreYouForm.controls['lastName'].value;
       this.user.email = this.whoAreYouForm.controls['email'].value;
       this.user.password = this.whoAreYouForm.controls['password'].value;  
-      this.carousel.nativeElement.next();
+      
       console.log(this.carousel)
     }
     
@@ -74,7 +72,10 @@ export class SignUpComponent implements OnInit {
       birthday: ['', Validators.required],
       category: [''],
       gender: ['male', Validators.required],
-      expert: [false, Validators.required]
+      expert: [false, Validators.required],
+      expertCategory: [''],
+      expertSubCategory: [''],
+      description: ['']
     }, {
         validator: PasswordValidation.MatchPassword
       });

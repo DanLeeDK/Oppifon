@@ -112,20 +112,16 @@
               <input type="string" class="form-control" formControlName="expertSubCategory" placeholder="Sub category">
             </div>
             <div class="form-group">
-              <textarea id="description" class="form-control" placeholder="Type a description about your self"></textarea>
+              <textarea type="string" class="form-control" formControlName="description" placeholder="Type a description about your self"></textarea>
             </div>
           </div>
           <div class="form-group">
             <div class="d-flex flex-row-reverse">
-              <button class="btn btn-primary" type="submit">Submit</button>
+              <button class="btn btn-primary" type="submit" routerLink="/">Submit</button>
             </div>
           </div>
-
         </form>
       </div>
     </div>
   </div>
 </div>
-
-<p>{{whoAreYouForm.value | json}}</p>
-<p>{{whoAreYouSubmit}}</p>
