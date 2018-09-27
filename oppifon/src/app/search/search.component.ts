@@ -20,7 +20,7 @@ export class SearchComponent implements OnInit {
   public getSubCatagories(mainCatagory: string) {
     // TODO service call
     this.subOptions = ['Love', 'Bullying', 'Stress', 'Anxiety', 'Food'];
-    console.log('Hello');
+    console.log(this.mainCatagory);
   }
 
 }

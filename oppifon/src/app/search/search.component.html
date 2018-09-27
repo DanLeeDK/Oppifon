@@ -1,17 +1,29 @@
-<div class="container form-group col-4">
-  <label for="mainCatagoryMethod">Choose Main Catagory</label>
-  <select name="mainCatagoryMethod" id="mainCatagoryMethod" class="form-control" [(ngModel)]="mainCatagory">
-    <option value="" disabled selected>Choose your option</option>
-    <option *ngFor="let option of mainOptions" [value]="option" (click)="getSubCatagories(option)">{{ option }}</option>
-  </select>
-</div>
+<div class="container">
+  <div class="container form-group col-4">
+    <label for="mainCatagoryMethod">Choose Main Catagory</label>
+    <select name="mainCatagoryMethod" id="mainCatagoryMethod" (change)="getSubCatagories(mainCatagory)" class="form-control"
+      [(ngModel)]="mainCatagory">
+      <option value="" disabled selected>Choose your option</option>
+      <option *ngFor="let option of mainOptions" [value]="option">{{ option }}</option>
+    </select>
+  </div>
 
-<div *ngIf="mainCatagory !== ''" class="container form-group col-4">
-    <label for="contactMethod">Sub Catagory</label>
-    <select name="contactMethod" id="contactMethod" class="form-control" [(ngModel)]="subCatagory">
+  <div *ngIf="mainCatagory !== ''" class="container form-group col-4">
+    <label for="subCatagoryMethod">Sub Catagory</label>
+    <select name="subCatagoryMethod" id="subCatagoryMethod" (change)="getSubCatagories(subCatagory)" class="form-control" [(ngModel)]="subCatagory">
       <option value="" disabled selected>Choose Sub Catagory</option>
       <option *ngFor="let option of subOptions" [value]="option">{{ option }}</option>
     </select>
   </div>
+</div>
+<label>{{subCatagory}}</label>
 
-<label>{{subOptions[0]}}</label>
+<div class="row">
+<div *ngFor="let option of subOptions" class="container col-sm">
+      <!-- Title -->
+      <h4 class="card-title"><a>Card title</a></h4>
+      <img class="card-img-100 rounded-circle d-flex z-depth-1 mr-3" src="assets/img/Rasmus.jpg" alt="Generic placeholder image">
+      <p class="card-text">"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod consectetur accusamus velit nostrum
+        et magnam"</p>
+    </div>
+  </div>
