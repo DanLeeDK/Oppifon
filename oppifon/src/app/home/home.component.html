@@ -11,7 +11,7 @@
               <mdb-carousel-item>
                 <div>
                   <mdb-card>
-                    <mdb-card-img href="/expertprofile" src={{profile}} alt="Card image cap"></mdb-card-img>
+                    <mdb-card-img class="h-75" href="/expertprofile" src={{profile}} alt="Card image cap"></mdb-card-img>
                     <mdb-card-body>
                       <mdb-card-title>
                         <h4>Card title</h4>
@@ -30,9 +30,8 @@
       </div>
     </div>
 
-
     <!--Navbar with Search button and Calender button-->
-    <nav id="buttonNavbar" class="navbar navbar-light cyan darken-3 lighten-4 mb-4">
+    <nav id="buttonNavbar" class=" container navbar navbar-light cyan darken-3 lighten-4 mb-4">
 
       <!-- Search button -->
       <button type="button" (click)="searchClick()" class="btn btn-mdb-color"><i class="fa fa-search mr-1"></i>
@@ -44,51 +43,53 @@
     </nav>
     <!--/.Navbar-->
 
-    <div id="feedbox" class="row">
+    <div id="feedbox" class=" container row">
 
       <!--Appointment column-->
-      <div class="col-3 container-fluid block-example border border-primary rounded-left">
-        <div class="row" id="label">
-          <h3 id="post">Appointments</h3>
-        </div>
-
-        <div *ngFor="let appointment of appointments">
-          <div class="row block-example border-bottom container-fluid border-primary">
-            <h5 id="post">{{appointment}}</h5>
+      <div class="col-3">
+        <div class="list-group">
+          <a href="#" class="list-group-item active waves-effect disabled">
+            Appointments
+          </a>
+          <div *ngFor="let appointment of appointments">
+            <a href="#" class="list-group-item list-group-item-action waves-effect">
+              {{appointment}}
+            </a>
           </div>
         </div>
       </div>
       <!--/.Appointment column-->
 
       <!--Feed column-->
-      <div class="col-6 container-fluid block-example border border-primary">
-        <div id="label" class="row ">
-          <h3 id="post">News feed</h3>
-        </div>
-
-        <div *ngFor="let appointment of appointments">
-          <div id="label" class="row block-example border-bottom container-fluid border-primary">
-            <h5 id="post">{{appointment}}</h5>
+      <div class="col-6">
+        <div class="list-group">
+          <a href="#" class="list-group-item active waves-effect disabled">
+            News feed
+          </a>
+          <div *ngFor="let appointment of appointments">
+            <a href="#" class="list-group-item list-group-item-action waves-effect">
+              {{appointment}}
+            </a>
           </div>
         </div>
       </div>
       <!--/.Feed column-->
 
       <!--Subscriber column-->
-      <div class="col-3 container-fluid block-example border border-primary rounded-right">
-        <div id="label" class="row">
-          <h3 id="post">Subscribtions</h3>
-        </div>
-
-        <div *ngFor="let appointment of appointments">
-          <div id="label" class="row block-example border-bottom container-fluid border-primary">
-            <h5 id="post">{{appointment}}</h5>
+      <div class="col-3">
+        <div class="list-group">
+          <a href="#" class="list-group-item active waves-effect disabled">
+            Subscribtions
+          </a>
+          <div *ngFor="let appointment of appointments">
+            <a href="#" class="list-group-item list-group-item-action waves-effect">
+              {{appointment}}
+            </a>
           </div>
         </div>
       </div>
       <!--/.Subscriber column-->
 
     </div>
-
   </div>
 </div>
