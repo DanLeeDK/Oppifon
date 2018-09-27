@@ -1,3 +1,17 @@
-<p>
-  search works!
-</p>
+<div class="container form-group col-4">
+  <label for="mainCatagoryMethod">Choose Main Catagory</label>
+  <select name="mainCatagoryMethod" id="mainCatagoryMethod" class="form-control" [(ngModel)]="mainCatagory">
+    <option value="" disabled selected>Choose your option</option>
+    <option *ngFor="let option of mainOptions" [value]="option" (click)="getSubCatagories(option)">{{ option }}</option>
+  </select>
+</div>
+
+<div *ngIf="mainCatagory !== ''" class="container form-group col-4">
+    <label for="contactMethod">Sub Catagory</label>
+    <select name="contactMethod" id="contactMethod" class="form-control" [(ngModel)]="subCatagory">
+      <option value="" disabled selected>Choose Sub Catagory</option>
+      <option *ngFor="let option of subOptions" [value]="option">{{ option }}</option>
+    </select>
+  </div>
+
+<label>{{subOptions[0]}}</label>
