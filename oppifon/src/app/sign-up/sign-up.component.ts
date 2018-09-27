@@ -19,16 +19,15 @@ export class SignUpComponent implements OnInit {
   passwordPattern = "^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{6,12}$";
   mobileNumberPattern = "^((\\+91-?)|0)?[0-9]{10}$";
   emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";
+  categories: string[];
 
   user: UserSignUp;
-
-
-  expert = false;
 
   public whoAreYouForm: FormGroup;
 
   constructor(public fb: FormBuilder) {
     this.user = new UserSignUp();
+    this.categories = [];
     this.createWhoAreYouForm(fb);
   }
 
@@ -37,6 +36,12 @@ export class SignUpComponent implements OnInit {
   }
 
   get f() { return this.whoAreYouForm.controls; }
+
+  public addCategory(){
+    let category = this.whoAreYouForm.controls["category"].value;
+    console.log(category);
+    this.categories.unshift(category);
+  }
 
   public onSubmit(){
     this.whoAreYouSubmit = true;
@@ -59,6 +64,12 @@ export class SignUpComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8)]],
       confirmPassword: ['', [Validators.required]],
+      city: ['', Validators.required],
+      phoneNumber: ['', Validators.required],
+      birthday: ['', Validators.required],
+      category: [''],
+      gender: ['male', Validators.required],
+      expert: [false, Validators.required]
     }, {
         validator: PasswordValidation.MatchPassword
       });
