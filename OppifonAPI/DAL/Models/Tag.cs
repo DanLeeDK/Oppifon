@@ -16,7 +16,10 @@ namespace DAL.Models
         public Guid CategoryId { get; set; }
         public Category Category { get; set; }
 
-        public Guid ExpertId { get; set; }
-        public Expert Expert { get; set; }
+        public Guid MainFieldsExpertId { get; set; }
+        public Expert MainFieldsExpert { get; set; }
+
+        public Guid ExpertTagsExpertId { get; set; }
+        public Expert ExpertTagsExpert { get; set; }
     }
 }

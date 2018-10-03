@@ -22,8 +22,8 @@ namespace DAL.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Calender>()
-                .HasOne(x => x.OffDays);
+            //modelBuilder.Entity<Calender>()
+            //    .HasOne(x => x.OffDays);
             //    .WithMany(x => x.)
             //    .HasKey(bc => new { bc.UserId, bc.AppointmentId });
 
