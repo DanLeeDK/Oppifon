@@ -58,5 +58,4 @@ export class SearchComponent implements OnInit {
   expertClick() {
     this.router.navigate(['/expert']);
   }
-
 }

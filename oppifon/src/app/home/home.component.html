@@ -37,6 +37,10 @@
       <button type="button" (click)="searchClick()" class="btn btn-mdb-color"><i class="fa fa-search mr-1"></i>
         Search expert</button>
 
+<!-- Search button -->
+<button type="button" (click)="expertClick()" class="btn btn-amber"><i class="fa fa-lightbulb-o mr-1"></i>
+  Expert Page</button>
+
       <!-- Calender button -->
       <button type="button" (click)="calendarClick()" class="btn btn-mdb-color"><i class="fa fa-calendar mr-1"></i> Calendar</button>
 
@@ -79,7 +83,7 @@
       <div class="col-3">
         <div class="list-group">
           <a href="#" class="list-group-item active waves-effect disabled">
-            Subscribtions
+            Favorites
           </a>
           <div *ngFor="let appointment of appointments">
             <a href="#" class="list-group-item list-group-item-action waves-effect">

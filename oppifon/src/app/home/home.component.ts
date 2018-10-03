@@ -18,6 +18,17 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/search']);
 }
 
+expertClick() {
+  // TODO if user has expert page
+  if (true) {
+  this.router.navigate(['/expert']);
+  // TODO if user dont have expert page
+} else {
+  // route to create expert page
+}
+
+}
+
   calendarClick() {
   this.router.navigate(['/calendar']);
 }
