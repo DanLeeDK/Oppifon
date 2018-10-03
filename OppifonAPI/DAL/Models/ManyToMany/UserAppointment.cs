@@ -6,6 +6,9 @@ namespace DAL.Models.ManyToMany
 {
     public class UserAppointment
     {
-        public Guid Id { get; set; }
+        public Guid UserId { get; set; }
+        public Guid AppointmentId { get; set; }
+        public User User { get; set; }
+        public Appointment Appointment { get; set; }
     }
 }
