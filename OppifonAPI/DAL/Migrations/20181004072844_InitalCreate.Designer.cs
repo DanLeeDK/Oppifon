@@ -4,14 +4,16 @@ using DAL.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DAL.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20181004072844_InitalCreate")]
+    partial class InitalCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -138,8 +140,6 @@ namespace DAL.Migrations
 
                     b.Property<bool>("Anonymity");
 
-                    b.Property<Guid>("ExpertId");
-
                     b.Property<string>("Name");
 
                     b.Property<int>("Rating");
@@ -147,8 +147,6 @@ namespace DAL.Migrations
                     b.Property<string>("ReviewText");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ExpertId");
 
                     b.ToTable("Reviews");
                 });
@@ -271,14 +269,6 @@ namespace DAL.Migrations
                     b.HasOne("DAL.Models.User", "User")
                         .WithMany("InterestTags")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("DAL.Models.Review", b =>
-                {
-                    b.HasOne("DAL.Models.Expert", "Expert")
-                        .WithMany("Reviews")
-                        .HasForeignKey("ExpertId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

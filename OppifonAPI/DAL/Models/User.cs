@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using DAL.Models.ManyToMany;
 
 namespace DAL.Models
 {
@@ -12,7 +13,7 @@ namespace DAL.Models
         public string LastName { get; set; }
         public string City { get; set; }
         public DateTime Birthday { get; set; }
-        public ICollection<Tag> InterestTags { get; set; }
+        public ICollection<UserTag> InterestTags { get; set; }
         public string Gender { get; set; }
         public Calender Calender { get; set; }
 
