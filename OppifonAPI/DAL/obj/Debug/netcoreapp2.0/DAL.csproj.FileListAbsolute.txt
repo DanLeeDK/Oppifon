@@ -1,9 +1,0 @@
-C:\Users\ERasmus\Documents\GitHub\Oppifon\OppifonAPI\DAL\bin\Debug\netcoreapp2.0\DAL.deps.json
-C:\Users\ERasmus\Documents\GitHub\Oppifon\OppifonAPI\DAL\bin\Debug\netcoreapp2.0\DAL.dll
-C:\Users\ERasmus\Documents\GitHub\Oppifon\OppifonAPI\DAL\bin\Debug\netcoreapp2.0\DAL.pdb
-C:\Users\ERasmus\Documents\GitHub\Oppifon\OppifonAPI\DAL\obj\Debug\netcoreapp2.0\DAL.csprojAssemblyReference.cache
-C:\Users\ERasmus\Documents\GitHub\Oppifon\OppifonAPI\DAL\obj\Debug\netcoreapp2.0\DAL.csproj.CoreCompileInputs.cache
-C:\Users\ERasmus\Documents\GitHub\Oppifon\OppifonAPI\DAL\obj\Debug\netcoreapp2.0\DAL.AssemblyInfoInputs.cache
-C:\Users\ERasmus\Documents\GitHub\Oppifon\OppifonAPI\DAL\obj\Debug\netcoreapp2.0\DAL.AssemblyInfo.cs
-C:\Users\ERasmus\Documents\GitHub\Oppifon\OppifonAPI\DAL\obj\Debug\netcoreapp2.0\DAL.dll
-C:\Users\ERasmus\Documents\GitHub\Oppifon\OppifonAPI\DAL\obj\Debug\netcoreapp2.0\DAL.pdb
