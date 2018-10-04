@@ -1,37 +1,62 @@
-
 <nav class="navbar navbar-dark bg-dark">
 
   <!-- logo -->
   <div class="navbar-brand">
-    <a class="navbar-item" (click)="logoClick()">
+    <a  id="logo"class="navbar-item" href="/home">
       <img src="assets/img/brain-logo.jpg" width="100" height="100">
-    <h1>Oppifon</h1>
-  </a>
+      <h1>Oppifon</h1>
+    </a>
   </div>
-  <form action="" class="login">
-    <div class="container">
-      <div class="row">
-        <div class="column">
-          <label for="uname"><b>Email</b></label>
-          <input type="text" placeholder="Email" name="email" required>
-        </div>
-        <div class="column">
-          <label for="psw"><b>Password</b></label>
-          <input type="password" placeholder="Enter Password" name="psw" required>
-        </div>
+  <div *ngIf="isLoggedIn()">
+    <form action="" class="login">
+      <div class="container">
+        <button data-toggle="modal" data-target="#loginModalCenter" mdbBtn color="success" class="waves-light" mdbWavesEffect>Login</button>
       </div>
-      <a href="/home" mdbBtn color="success" class="waves-light" mdbWavesEffect>Login</a>
-      <input type="checkbox" name="remember"><label>Remember me</label>
-
-
-      <label style="float: right" class="psw">Forgot <a href="#">password?</a></label>
-    </div>
-
-    <div class="container">
-
-    </div>
-
-    <div class="container" style="background-color:#f1f1f1">
-    </div>
-  </form>
+    </form>
+  </div>
 </nav>
+
+<div class="container">
+  <div class="modal fade" id="loginModalCenter" tabindex="-1" role="form" aria-labelledby="ModalCenterTitle" aria-hidden="true">
+
+    <!-- Add .modal-dialog-centered to .modal-dialog to vertically center the modal -->
+    <div class="modal-dialog modal-dialog-centered" role="document">
+
+      <div class="modal-content">
+        <!-- Default form login -->
+        <form class="text-center border border-light p-5">
+
+          <!-- Email -->
+          <input type="email" id="oginFormEmail" class="form-control mb-4" placeholder="E-mail">
+
+          <!-- Password -->
+          <input type="password" id="loginFormPassword" class="form-control mb-4" placeholder="Password">
+
+          <div class="d-flex justify-content-around">
+            <div>
+              <!-- Remember me -->
+              <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="loginFormRemember">
+                <label class="custom-control-label" for="loginFormRemember">Remember me</label>
+              </div>
+            </div>
+            <div>
+              <!-- Forgot password -->
+              <a href="/forgot-password">Forgot password?</a>
+            </div>
+          </div>
+
+          <!-- Sign in button -->
+          <button class="btn btn-success btn-block my-4" type="submit">Login</button>
+
+          <!-- Register -->
+          <p>Not a member?
+            <a href="/signup">Register</a>
+          </p>
+        </form>
+        <!-- form login -->
+
+      </div>
+    </div>
+  </div>
+</div>

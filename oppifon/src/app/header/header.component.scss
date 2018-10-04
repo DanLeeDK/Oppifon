@@ -8,12 +8,13 @@ nav {
   border: 3px solid #f1f1f1;
 }
 
-form {
-  float: right;
+#logo {
+  color: white;
 }
 
+
 /* Full-width inputs */
-input[type=text], input[type=password] {
+input[type=text], {
   width: 60%;
   padding: 4px 4px;
   display: inline-block;
@@ -22,27 +23,14 @@ input[type=text], input[type=password] {
   color: whitesmoke;
 }
 
-input {
-  color: whitesmoke;
-}
 
-/* Set a style for all buttons */
-button {
-  margin: 8px;
-  border: none;
-  cursor: pointer;
-  width: 15%;
-}
+
 
 /* Add a hover effect for buttons */
 button:hover {
   opacity: 0.8;
 }
 
-label {
-  padding: 8px;
-  color: whitesmoke;
-}
 
 /* The "Forgot password" text */
 span.psw {

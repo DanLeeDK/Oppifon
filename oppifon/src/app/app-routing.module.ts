@@ -1,3 +1,4 @@
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'home', component: HomeComponent},
   { path: 'signup', component: SignUpComponent },
+  { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'calendar', component: CalendarComponent },
   { path: 'search', component: SearchComponent },
   { path: 'expert', component: ExpertProfileComponent},

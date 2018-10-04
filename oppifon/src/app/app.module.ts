@@ -16,6 +16,7 @@ import { ExpertProfileComponent } from './expert-profile/expert-profile.componen
 import { SearchComponent } from './search/search.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     ExpertProfileComponent,
     SearchComponent,
     CalendarComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    ForgotPasswordComponent
   ],
   imports: [
     MDBBootstrapModule.forRoot(),

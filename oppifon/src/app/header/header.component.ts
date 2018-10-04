@@ -12,7 +12,9 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
   }
-  logoClick() {
-    this.router.navigate(['/home']);
-}
+
+
+  isLoggedIn() {
+    return true; // check if user is logged in.
+  }
 }
