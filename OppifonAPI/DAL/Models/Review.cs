@@ -11,5 +11,9 @@ namespace DAL.Models
         public string ReviewText { get; set; }
         public int Rating { get; set; }
         public bool Anonymity { get; set; }
+
+        // Backwards navigation
+        public Guid ExpertId { get; set; }
+        public Expert Expert { get; set; }
     }
 }

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using DAL.Models;
+﻿using DAL.Models;
 using DAL.Models.ManyToMany;
 using Microsoft.EntityFrameworkCore;
 
@@ -22,22 +19,33 @@ namespace DAL.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //modelBuilder.Entity<Calender>()
-            //    .HasOne(x => x.OffDays);
-            //    .WithMany(x => x.)
-            //    .HasKey(bc => new { bc.UserId, bc.AppointmentId });
+            //Many to many experts and tags
+            modelBuilder.Entity<ExpertTag>()
+               .HasKey(e => new {e.ExpertId, e.TagId});
 
-            //modelBuilder.Entity<UserAppointment>()
-            //    .HasOne(bc => bc.User)
-            //    .WithMany(b => b.Calender.Appointments)
-            //    .HasForeignKey(bc => bc.UserId);
+            modelBuilder.Entity<ExpertTag>()
+                .HasOne(et => et.Expert)
+                .WithMany(e => e.ExpertTags)
+                .HasForeignKey(et => et.ExpertId);
 
-            //modelBuilder.Entity<UserAppointment>()
-            //    .HasOne(bc => bc.Appointment)
-            //    .WithMany(c => c.Participants)
-            //    .HasForeignKey(bc => bc.AppointmentId);
+            modelBuilder.Entity<ExpertTag>()
+                .HasOne(et => et.Tag)
+                .WithMany(t => t.ExpertsTags)
+                .HasForeignKey(et => et.TagId);
+
+            // Many to many users and tags
+            modelBuilder.Entity<UserTag>()
+                .HasKey(u => new { u.UserId, u.TagId });
+
+            modelBuilder.Entity<UserTag>()
+                .HasOne(ut => ut.User)
+                .WithMany(u => u.InterestTags)
+                .HasForeignKey(ut => ut.UserId);
+
+            modelBuilder.Entity<UserTag>()
+                .HasOne(ut => ut.Tag)
+                .WithMany(t => t.UsersTags)
+                .HasForeignKey(et => et.TagId);
         }
-
-
     }
 }
