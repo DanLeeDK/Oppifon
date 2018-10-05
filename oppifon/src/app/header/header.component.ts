@@ -15,6 +15,6 @@ export class HeaderComponent implements OnInit {
 
 
   isLoggedIn() {
-    return true; // check if user is logged in.
+    return false; // check if user is logged in.
   }
 }

@@ -9,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 export class SearchComponent implements OnInit {
   public mainOptions = ['Technologi', 'Health', 'Education', 'Sport', 'Psychology'];
   public mainCatagory: string;
-  public searchText: string;
+  public searchText = '';
 
   public experts = [
     { id: '1', firstName: 'Mark', lastName: 'Otto', catagory: 'Technologi' },
