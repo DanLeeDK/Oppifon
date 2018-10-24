@@ -56,13 +56,13 @@
 
       <div class="modal-content">
         <!-- Default form login -->
-        <form class="text-center border border-light p-5">
+        <form class="text-center border border-light p-5" (ngSubmit)="onSubmit(f)"[formGroup]="loginForm">
 
           <!-- Email -->
-          <input type="email" id="oginFormEmail" class="form-control mb-4" placeholder="E-mail">
+          <input formControlName="email" type="email" id="oginFormEmail" class="form-control mb-4" placeholder="E-mail">
 
           <!-- Password -->
-          <input type="password" id="loginFormPassword" class="form-control mb-4" placeholder="Password">
+          <input formControlName="password" type="password" id="loginFormPassword" class="form-control mb-4" placeholder="Password">
 
           <div class="d-flex justify-content-around">
             <div>
