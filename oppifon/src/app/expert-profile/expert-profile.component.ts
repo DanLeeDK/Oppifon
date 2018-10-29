@@ -1,5 +1,6 @@
+import { HttpService } from './../shared/http.service';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-expert-profile',
@@ -7,10 +8,15 @@ import { Router } from '@angular/router';
   styleUrls: ['./expert-profile.component.scss']
 })
 export class ExpertProfileComponent implements OnInit {
-public reviews = ['Super professional help', 'Really helped me a lot', 'Best talk ever!'];
-  constructor(private router: Router) { }
+  public id: string;
+  public reviews = ['Super professional help', 'Really helped me a lot', 'Best talk ever!'];
+  constructor(private router: Router, private http: HttpService, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.route.params.subscribe( params => {
+      this.id = params.toString();
+      console.log(this.id);
+    });
   }
 
   calendarClick() {

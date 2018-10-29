@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { AuthorizationService } from './../shared/authorization.service';
 import { Component, OnInit } from '@angular/core';
 import { UserCredentials } from '../shared/models/Models';
@@ -10,8 +11,12 @@ import { UserCredentials } from '../shared/models/Models';
 export class LoginComponent implements OnInit {
   public title = 'Welcome to Oppifon';
   public profiles = ['assets/img/Dan.jpg', 'assets/img/Henrik.jpg', 'assets/img/Rasmus.jpg'];
-  constructor(private service: AuthorizationService) { }
+  constructor(private service: AuthorizationService, private router: Router) { }
 
   ngOnInit() {
+  }
+
+  signupClick() {
+    this.router.navigate(["/signup"]);
   }
 }

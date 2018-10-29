@@ -18,7 +18,7 @@ const routes: Routes = [
   { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'calendar', component: CalendarComponent },
   { path: 'search', component: SearchComponent },
-  { path: 'expert', component: ExpertProfileComponent},
+  { path: 'expert/:id', component: ExpertProfileComponent},
   { path: '', redirectTo: '/login', pathMatch: 'full'},
   { path: '**', component: PageNotFoundComponent}
 ];
