@@ -20,7 +20,7 @@
       </div>
 
       <div class="row">
-        <a *ngFor="let expert of search()" class="container col-md-3" routerLink="/expert/{{expert.id}}">
+        <a *ngFor="let expert of search()" class="container col-md-3" (click)="goToExpertDetails(expert.id)">
           <mdb-card id="expertCard">
             <mdb-card-body>
               <!-- Title -->

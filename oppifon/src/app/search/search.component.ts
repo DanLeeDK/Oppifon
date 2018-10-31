@@ -23,6 +23,10 @@ export class SearchComponent implements OnInit {
       this.mainOptions = data; } );
   }
 
+  goToExpertDetails(id) {
+    this.router.navigate(['/expert', id]);
+  }
+
 // TODO Should not be case sensitive
   filterAll(arr, searchKey) {
     return arr.filter((obj) => {
