@@ -11,6 +11,7 @@ import { ExpertProfileComponent } from './expert-profile/expert-profile.componen
 import { AuthGuard } from './guards/auth.guard';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
+
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'home', component: HomeComponent},
@@ -28,5 +29,3 @@ const routes: Routes = [
   exports: [ RouterModule ]
 })
 export class AppRoutingModule {}
-
-

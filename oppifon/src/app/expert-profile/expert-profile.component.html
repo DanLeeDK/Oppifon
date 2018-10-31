@@ -5,10 +5,10 @@
     <div class="card-header border-0 font-weight-bold d-flex justify-content-between">
       <div>
         <h5 class="font-weight-bold mt-0">
-          <a class="text-default" href="">Danny Newman</a>
+          <a class="text-default" href="">{{expert.firstName}} {{expert.lastName}}</a>
         </h5>
         <h6 class="mt-0">
-          <a class="text-default">Cand.phych</a>
+          <a class="text-default">{{expert.expertCategory}}</a>
         </h6>
       </div>
       <div class="text-right">
@@ -36,8 +36,7 @@
 
     <div class="container media mt-4 px-1">
       <img class="card-img-100 rounded-circle d-flex z-depth-1 mr-3" src="assets/img/Rasmus.jpg" alt="Generic placeholder image">
-      <p class="card-text">"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod consectetur accusamus velit nostrum
-        et magnam"</p>
+      <p class="card-text">"{{expert.description}}"</p>
     </div>
 
     <br/>
@@ -55,7 +54,7 @@
           <i class="grey-text mr-1"><i class="fa fa-lg fa-star-half"> </i></i>
         </div>
 
-        <ul *ngFor="let review of reviews" class="list-group list-group-flush">
+        <ul *ngFor="let review of expert.reviews" class="list-group list-group-flush">
           <li class="list-group-item">{{review}}</li>
 
         </ul>
@@ -67,14 +66,13 @@
         <h5>
           <a>Main fields</a>
         </h5>
-        <ul class="list-group">
-          <li class="list-group-item">Love <i class="fa fa-lg fa-heart"></i></li>
-          <li class="list-group-item">Stress <i class="fa fa-lg fa-flash"></i></li>
-          <li class="list-group-item">Mindfulness <i class="fa fa-lg fa-hand-peace-o"></i></li>
-          <button id="bookButton" (click)=calendarClick() mdbBtn type="button" color="success" class="waves-light" mdbWavesEffect>Book
-            Danny
-          </button>
+        <ul class="list-group" *ngFor="let main of expert.mainFields">
+          <li class="list-group-item">{{main}} <i class="fa fa-lg fa-heart"></i></li>
+
         </ul>
+        <button id="bookButton" (click)=calendarClick() mdbBtn type="button" color="success" class="waves-light" mdbWavesEffect>Book
+          {{expert.firstName}}
+        </button>
       </div>
     </div>
   </div>
@@ -99,28 +97,28 @@
         <div class="row text-center">
           <div class="col-md-6">
             <i class="fa fa-user"></i>
-            <p>Danny Newman</p>
-            <p>Cand.phych</p>
+            <p>{{expert.firstName}} {{expert.lastName}}</p>
+            <p>{{expert.expertCategory}}</p>
           </div>
 
           <div class="col-md-6">
               <i class="fa fa-home"></i>
-            <p>San Francisco, CA 94126</p>
-            <p>United States</p>
+            <p>{{expert.city}}</p>
+            <p></p>
           </div>
         </div>
         <div class="row text-center">
 
           <div class="col-md-6">
             <i class="fa fa-phone"></i>
-            <p>+ 45 21 43 65 87</p>
-            <p>Mon - Fri, 8:00-22:00</p>
+            <p>{{expert.phoneNumber}}</p>
+            <p></p>
           </div>
 
           <div class="col-md-6">
             <i class="fa fa-envelope"></i>
-            <p>dannynewman@gmail.com</p>
-            <p>Eskeeit@gmail.com</p>
+            <p>{{expert.email}}</p>
+            <p></p>
           </div>
         </div>
       </div>

@@ -23,6 +23,11 @@ export class HttpService {
     return this.http.get<any>(url);
   }
 
+  getExpert(id: string): Observable<User> {
+    const url = `${this.apiUrl}Expert/${id}`;
+    return this.http.get<any>(url);
+  }
+
   getCategories(): Observable<string[]> {
     const url = `${this.apiUrl}Category`;
     return this.http.get<any>(url);

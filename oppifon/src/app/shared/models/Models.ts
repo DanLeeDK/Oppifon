@@ -20,4 +20,12 @@ export class User {
   expertTags: string[];
   mainFields: string[];
   description: string;
+  reviews: Review[];
+}
+
+export class Review {
+name: string;
+reviewText: string;
+rating: string;
+anonymity: string;
 }

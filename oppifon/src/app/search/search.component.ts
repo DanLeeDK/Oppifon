@@ -55,7 +55,4 @@ export class SearchComponent implements OnInit {
     console.log(this.mainCatagory);
   }
 
-  expertClick() {
-    this.router.navigate(['/expert']);
-  }
 }
