@@ -1,3 +1,4 @@
+import { HttpService } from './../shared/http.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { PasswordValidation } from './validation';
@@ -16,20 +17,26 @@ export class SignUpComponent implements OnInit {
   passwordPattern = '^(?=.*d)(?=.*[a-z])(?=.*[A-Z])(?!.*s).{6,12}$';
   mobileNumberPattern = '^((\\+91-?)|0)?[0-9]{10}$';
   emailPattern = '^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$';
+  catagories: string[];
   interest: string;
+  subCatagory: string;
+  mainField: string;
   category: string;
 
   user: User;
 
   constructor(
     private router: Router,
-    private authenticationService: AuthorizationService
+    private authenticationService: AuthorizationService, private http: HttpService
   ) {
     this.user = new User();
     this.user.isExpert = false;
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.http.getCategories().subscribe( data => {
+      this.catagories = data; });
+  }
 
 
   public addInterest() {
@@ -39,6 +46,7 @@ export class SignUpComponent implements OnInit {
       }
     this.user.interestTags.push(this.interest);
     }
+    this.interest = '';
   }
 
   public removeInterest(interestToRemove: string) {
@@ -49,14 +57,34 @@ export class SignUpComponent implements OnInit {
 
   public addCategory() {
     if (this.category !== '') {
-      this.user.expertTags.unshift(this.category);
+      if (this.user.expertTags === undefined) {
+        this.user.expertTags = [];
+      }
+      this.user.expertTags.push(this.subCatagory);
     }
+    this.subCatagory = '';
   }
 
   public removeCategory(categoryToRemove: string) {
     const category = this.user.expertTags.find(x => x === categoryToRemove);
     const index = this.user.expertTags.indexOf(category);
     this.user.expertTags.splice(index, 1);
+  }
+
+  public addMainField() {
+    if (this.mainField !== '') {
+      if (this.user.mainFields === undefined) {
+        this.user.mainFields = [];
+      }
+    this.user.mainFields.push(this.mainField);
+    }
+    this.mainField = '';
+  }
+
+  public removeMainField(mainFieldToRemove: string) {
+    const mainField = this.user.mainFields.find(x => x === mainFieldToRemove);
+    const index = this.user.mainFields.indexOf(mainField);
+    this.user.mainFields.splice(index, 1);
   }
 
   public onSubmit() {
