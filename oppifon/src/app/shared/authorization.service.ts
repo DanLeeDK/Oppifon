@@ -63,8 +63,15 @@ export class AuthorizationService {
       const token = this.getToken();
       const payload = JSON.parse(window.atob(token.split('.')[1]));
       const user = new User();
+      user.id = payload.id;
       user.email = payload.email;
-      user.firstName = payload.name;
+      user.firstName = payload.firstName;
+      user.lastName = payload.lastName;
+      if (payload.isExpert === 'True') {
+      user.isExpert = true;
+    } else {
+      user.isExpert = false;
+    }
       return user;
     } else {
       return;

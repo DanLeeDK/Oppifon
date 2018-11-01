@@ -12,6 +12,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ReviewPageComponent implements OnInit {
   review: Review;
+  public ratings = [1, 2, 3, 4, 5];
   public expert$: Observable<User>;
   constructor(private http: HttpService, private route: ActivatedRoute, private auth: AuthorizationService) {
     this.review = new Review();

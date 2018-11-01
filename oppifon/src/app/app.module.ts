@@ -21,6 +21,8 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthorizationService } from './shared/authorization.service';
 import { AuthInterceptor } from './shared/auth.interceptor';
 import { ReviewPageComponent } from './review-page/review-page.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -44,7 +46,9 @@ import { ReviewPageComponent } from './review-page/review-page.component';
     ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule,
+    BrowserAnimationsModule,
+    MatProgressSpinnerModule
   ],
   schemas: [NO_ERRORS_SCHEMA],
   providers: [

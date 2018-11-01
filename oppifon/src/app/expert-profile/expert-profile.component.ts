@@ -18,7 +18,7 @@ export class ExpertProfileComponent implements OnInit {
     this.getExpert();
 }
 
-getExpert(): void {
+  getExpert(): void {
   this.route.params.subscribe(params => {
     const id = params['id'];
     this.expert$ = this.http.getExpert(id);

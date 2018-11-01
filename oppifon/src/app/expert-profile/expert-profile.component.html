@@ -1,4 +1,4 @@
-<!--Section: Author Box-->
+
 <ng-container *ngIf="expert$ | async as expert; else loading">
   <section class="my-5 fluid-container">
     <div class="card card-body">
@@ -46,17 +46,9 @@
           <h5>
             <a>Reviews</a>
           </h5>
-          <div id="reviewStars">
-            <i>4.5 </i>
-            <i class="grey-text mr-1"><i class="fa fa-lg fa-star"> </i></i>
-            <i class="grey-text mr-1"><i class="fa fa-lg fa-star"> </i></i>
-            <i class="grey-text mr-1"><i class="fa fa-lg fa-star"> </i></i>
-            <i class="grey-text mr-1"><i class="fa fa-lg fa-star"> </i></i>
-            <i class="grey-text mr-1"><i class="fa fa-lg fa-star-half"> </i></i>
-          </div>
 
           <ul *ngFor="let review of expert?.reviews" class="list-group list-group-flush">
-            <li class="list-group-item">{{review.reviewText}}</li>
+            <li class="list-group-item"><label>{{review.rating}}<i class="grey-text mr-1"><i class="fa fa-lg fa-star"> </i></i></label>{{review.reviewText}}</li>
           </ul>
           <button id="bookButton" (click)=reviewClick() mdbBtn type="button" color="success" class="waves-light"
             mdbWavesEffect>Review
@@ -66,7 +58,7 @@
         <div class="container col-sm">
           <!-- empty div to separat Reviews and Main fields -->
         </div>
-        <div class="container col-sm">
+        <div class="container col-sm card">
           <h5>
             <a>Main fields</a>
           </h5>
@@ -137,4 +129,4 @@
   </div>
 </ng-container>
 
-<ng-template #loading>Loading...</ng-template>
+<ng-template #loading><mat-spinner></mat-spinner></ng-template>
