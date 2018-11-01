@@ -5,6 +5,7 @@ export class UserCredentials {
 }
 
 export class User {
+  id: string;
   firstName: string;
   lastName: string;
   email: string;
@@ -25,7 +26,8 @@ export class User {
 
 export class Review {
 name: string;
+title: string;
 reviewText: string;
-rating: string;
-anonymity: string;
+rating: number;
+anonymity: boolean;
 }

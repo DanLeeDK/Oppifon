@@ -1,3 +1,4 @@
+import { ReviewPageComponent } from './review-page/review-page.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { NgModule } from '@angular/core';
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'calendar', component: CalendarComponent },
   { path: 'search', component: SearchComponent },
   { path: 'expert/:id', component: ExpertProfileComponent},
+  { path: 'review/:id', component: ReviewPageComponent},
   { path: '', redirectTo: '/login', pathMatch: 'full'},
   { path: '**', component: PageNotFoundComponent}
 ];
