@@ -23,11 +23,17 @@ getExpert(): void {
     const id = params['id'];
     this.expert$ = this.http.getExpert(id);
  });
-
-
 }
+
   calendarClick() {
     this.router.navigate(['/calendar']);
+  }
+
+  reviewClick() {
+    this.route.params.subscribe(params => {
+      const id = params['id'];
+      this.router.navigate(['/review/' + id]);
+   });
   }
 
 }

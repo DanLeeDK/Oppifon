@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { User } from './models/Models';
+import { User, Review } from './models/Models';
 
 @Injectable({
   providedIn: 'root'
@@ -13,10 +13,6 @@ export class HttpService {
 
   apiUrl = 'http://localhost:51071/api/';
 
-  getUser() {
-    const url = `${this.apiUrl}getUser`;
-    return this.http.get<any>(url);
-  }
 
   getExperts(): Observable<User[]> {
     const url = `${this.apiUrl}Expert`;
@@ -31,6 +27,11 @@ export class HttpService {
   getCategories(): Observable<string[]> {
     const url = `${this.apiUrl}Category`;
     return this.http.get<any>(url);
+  }
+
+  addReview(id: string, review: Review) {
+    const url = `${this.apiUrl}expert/${id}/review`;
+    return this.http.post(url, review);
   }
 
 }

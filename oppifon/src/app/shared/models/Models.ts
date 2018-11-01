@@ -25,7 +25,8 @@ export class User {
 
 export class Review {
 name: string;
+title: string;
 reviewText: string;
-rating: string;
-anonymity: string;
+rating: number;
+anonymity: boolean;
 }

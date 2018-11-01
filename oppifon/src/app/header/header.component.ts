@@ -31,7 +31,7 @@ export class HeaderComponent implements OnInit  {
       password: ['', Validators.required]
     });
 
-    this.isLoggedIn = this.authenticationService.Isloggedin();
+    this.isLoggedIn = this.authenticationService.isLoggedIn();
 
     // get return url from route parameters or default to '/'
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
@@ -65,7 +65,7 @@ export class HeaderComponent implements OnInit  {
 
     logout() {
       this.authenticationService.logout();
-      this.isLoggedIn = this.authenticationService.Isloggedin();
+      this.isLoggedIn = this.authenticationService.isLoggedIn();
       this.router.navigate(['/login']);
     }
 }

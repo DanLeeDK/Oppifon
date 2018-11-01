@@ -57,8 +57,11 @@
 
           <ul *ngFor="let review of expert?.reviews" class="list-group list-group-flush">
             <li class="list-group-item">{{review.reviewText}}</li>
-
           </ul>
+          <button id="bookButton" (click)=reviewClick() mdbBtn type="button" color="success" class="waves-light"
+            mdbWavesEffect>Review
+            {{expert.firstName}}
+          </button>
         </div>
         <div class="container col-sm">
           <!-- empty div to separat Reviews and Main fields -->
