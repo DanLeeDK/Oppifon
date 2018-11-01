@@ -1,28 +1,9 @@
-import {
-  OnInit,
-  Component,
-  ChangeDetectionStrategy,
-  ViewChild,
-  TemplateRef
-} from '@angular/core';
-import {
-  startOfDay,
-  endOfDay,
-  subDays,
-  addDays,
-  endOfMonth,
-  isSameDay,
-  isSameMonth,
-  addHours
-} from 'date-fns';
+import { OnInit, Component, ChangeDetectionStrategy, ViewChild, TemplateRef} from '@angular/core';
+import { startOfDay, endOfDay, subDays, addDays, endOfMonth, isSameDay, isSameMonth, addHours} from 'date-fns';
 import { Subject } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import {
-  CalendarEvent,
-  CalendarEventAction,
-  CalendarEventTimesChangedEvent,
-  CalendarView
-} from 'angular-calendar';
+import { CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent, CalendarView} from 'angular-calendar';
+import { WEBAppointment } from '../shared/models/appointment';
 
 const colors: any = {
   red: {
@@ -61,7 +42,7 @@ export class CalendarComponent implements OnInit {
     event: CalendarEvent;
   };
 
-  actions: CalendarEventAction[] = [
+    actions: CalendarEventAction[] = [
     {
       label: '<i class="fa fa-fw fa-pencil"></i>',
       onClick: ({ event }: { event: CalendarEvent }): void => {
@@ -79,54 +60,16 @@ export class CalendarComponent implements OnInit {
 
   refresh: Subject<any> = new Subject();
 
-  events: CalendarEvent[] = [
-    {
-      start: subDays(startOfDay(new Date()), 1),
-      end: addDays(new Date(), 1),
-      title: 'A 3 day event',
-      color: colors.red,
-      actions: this.actions,
-      allDay: true,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true
-      },
-      draggable: true
-    },
-    {
-      start: startOfDay(new Date()),
-      title: 'An event with no end date',
-      color: colors.yellow,
-      actions: this.actions
-    },
-    {
-      start: subDays(endOfMonth(new Date()), 3),
-      end: addDays(endOfMonth(new Date()), 3),
-      title: 'A long event that spans 2 months',
-      color: colors.blue,
-      allDay: true
-    },
-    {
-      start: addHours(startOfDay(new Date()), 2),
-      end: new Date(),
-      title: 'A draggable and resizable event',
-      color: colors.yellow,
-      actions: this.actions,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true
-      },
-      draggable: true
-    }
-  ];
+  events: CalendarEvent<WEBAppointment>[] = [  ];
 
   activeDayIsOpen: boolean = true;
 
   constructor(private modal: NgbModal) {}
 
-  ngOnInit()
-  {
+  appointment: WEBAppointment;
 
+  ngOnInit(){
+    this.appointment = new WEBAppointment();
   }
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
@@ -160,16 +103,27 @@ export class CalendarComponent implements OnInit {
   }
 
   addEvent(): void {
+    let myAppointment = new WEBAppointment();
+    myAppointment.title = this.appointment.title;
+    myAppointment.text = this.appointment.text;
+    myAppointment.maxParticipants = this.appointment.maxParticipants,
+    myAppointment.startTime = this.appointment.startTime;
+    myAppointment.endTime = this.appointment.endTime;
+    //myAppointment.name 
+    //myAppointment.creatorId
+
     this.events.push({
-      title: 'New event',
-      start: startOfDay(new Date()),
-      end: endOfDay(new Date()),
+      title: this.appointment.title,
+      start: startOfDay(this.appointment.startTime),
+      end: endOfDay(this.appointment.endTime),
       color: colors.red,
-      draggable: true,
+      draggable: false,
       resizable: {
-        beforeStart: true,
-        afterEnd: true
-      }
+        beforeStart: false,
+        afterEnd: false
+      },
+      actions: this.actions,
+      meta: myAppointment
     });
     this.refresh.next();
   }
