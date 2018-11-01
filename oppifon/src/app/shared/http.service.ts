@@ -3,7 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { User, Review } from './models/Models';
-
+import { Appointment } from './models/appointment';
+import { Calendar } from './models/Calendar';
 @Injectable({
   providedIn: 'root'
 })
@@ -32,6 +33,16 @@ export class HttpService {
   addReview(id: string, review: Review) {
     const url = `${this.apiUrl}expert/${id}/review`;
     return this.http.post(url, review);
+  }
+
+  getPrivateCalendar(userId: string): Observable<Calendar> {
+    const url = `${this.apiUrl}calendar/user/${userId}`
+    return this.http.get<Calendar>(url);
+  }
+
+  addAppointment(appointment: Appointment): Observable<any> {
+    const url = `${this.apiUrl}appointment`;
+    return this.http.post(url, appointment);
   }
 
 }

@@ -25,7 +25,6 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthorizationService } from './shared/authorization.service';
 import { AuthInterceptor } from './shared/auth.interceptor';
 import { ReviewPageComponent } from './review-page/review-page.component';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
@@ -51,9 +50,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     HttpClientModule,
     AppRoutingModule,
     NgbModule,
-    BrowserAnimationsModule,
-    MatProgressSpinnerModule
-    NgbModule,
+    MatProgressSpinnerModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     FlatpickrModule.forRoot(),

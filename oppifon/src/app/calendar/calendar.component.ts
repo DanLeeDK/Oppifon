@@ -3,7 +3,11 @@ import { startOfDay, endOfDay, subDays, addDays, endOfMonth, isSameDay, isSameMo
 import { Subject } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent, CalendarView} from 'angular-calendar';
-import { WEBAppointment } from '../shared/models/appointment';
+import { Appointment } from '../shared/models/appointment';
+import { AuthorizationService } from '../shared/authorization.service';
+import { HttpService } from '../shared/http.service';
+import { User } from '../shared/models/Models';
+import { Calendar } from '../shared/models/Calendar';
 
 const colors: any = {
   red: {
@@ -37,6 +41,8 @@ export class CalendarComponent implements OnInit {
 
   viewDate: Date = new Date();
 
+  user: User;
+
   modalData: {
     action: string;
     event: CalendarEvent;
@@ -60,16 +66,25 @@ export class CalendarComponent implements OnInit {
 
   refresh: Subject<any> = new Subject();
 
-  events: CalendarEvent<WEBAppointment>[] = [  ];
+  events: CalendarEvent<Appointment>[] = [  ];
 
   activeDayIsOpen: boolean = true;
 
-  constructor(private modal: NgbModal) {}
+  constructor(private modal: NgbModal, private auth: AuthorizationService, private http: HttpService) {}
 
-  appointment: WEBAppointment;
+  appointment: Appointment;
+  calendar: Calendar
 
   ngOnInit(){
-    this.appointment = new WEBAppointment();
+    this.appointment = new Appointment();
+    this.user = this.auth.currentUser();
+    this.http.getPrivateCalendar(this.user.id)
+    .subscribe(data => {
+      this.calendar = data
+      this.calendar.appointments.forEach(element => {
+        this.pushToLocalEventList(element);
+      });
+    })
   }
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
@@ -102,20 +117,11 @@ export class CalendarComponent implements OnInit {
     this.modal.open(this.modalContent, { size: 'lg' });
   }
 
-  addEvent(): void {
-    let myAppointment = new WEBAppointment();
-    myAppointment.title = this.appointment.title;
-    myAppointment.text = this.appointment.text;
-    myAppointment.maxParticipants = this.appointment.maxParticipants,
-    myAppointment.startTime = this.appointment.startTime;
-    myAppointment.endTime = this.appointment.endTime;
-    //myAppointment.name 
-    //myAppointment.creatorId
-
+  private pushToLocalEventList(appointment: Appointment){
     this.events.push({
-      title: this.appointment.title,
-      start: startOfDay(this.appointment.startTime),
-      end: endOfDay(this.appointment.endTime),
+      title: appointment.title,
+      start: startOfDay(appointment.startTime),
+      end: endOfDay(appointment.endTime),
       color: colors.red,
       draggable: false,
       resizable: {
@@ -123,8 +129,25 @@ export class CalendarComponent implements OnInit {
         afterEnd: false
       },
       actions: this.actions,
-      meta: myAppointment
+      meta: appointment
     });
     this.refresh.next();
+  }
+
+  addEvent(): void {
+    let myAppointment = new Appointment();
+    myAppointment.title = this.appointment.title;
+    myAppointment.text = this.appointment.text;
+    myAppointment.maxParticipants = this.appointment.maxParticipants,
+    myAppointment.startTime = this.appointment.startTime;
+    myAppointment.endTime = this.appointment.endTime;
+    myAppointment.name = this.user.firstName + " " + this.user.lastName;
+    myAppointment.creatorId = this.user.id;
+
+    this.http.addAppointment(myAppointment)
+    .subscribe(() => {
+      this.pushToLocalEventList(myAppointment);
+      this.appointment = new Appointment();
+    });   
   }
 }
