@@ -4,6 +4,7 @@ import { User, Review } from '../shared/models/Models';
 import { Observable } from 'rxjs';
 import { HttpService } from '../shared/http.service';
 import { ActivatedRoute } from '@angular/router';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-review-page',
@@ -14,22 +15,39 @@ export class ReviewPageComponent implements OnInit {
   review: Review;
   public ratings = [1, 2, 3, 4, 5];
   public expert$: Observable<User>;
-  constructor(private http: HttpService, private route: ActivatedRoute, private auth: AuthorizationService) {
+  form;
+
+  constructor(private http: HttpService, private route: ActivatedRoute, private auth: AuthorizationService, private fb: FormBuilder) {
     this.review = new Review();
+
+    this.form = fb.group({
+      title: ['', Validators.required],
+      reviewText: ['', Validators.required],
+      rating: ['', Validators.required]
+    });
   }
 
   ngOnInit() {
       this.getExpert();
+      this.review.anonymity = false;
     }
 
-  public onSubmit() {
-    this.route.params.subscribe(params => {
-      const id = params['id'];
-      console.log('Adding review');
-      this.review.name = this.auth.currentUser().firstName; // + ' ' + this.user.lastName;
-      this.http.addReview(id, this.review).subscribe();
-    });
-  }
+    onSubmit() {
+      if (this.form.valid) {
+        this.route.params.subscribe(params => {
+          const id = params['id'];
+          console.log('Adding review');
+          this.review.name = this.auth.currentUser().firstName + ' ' + this.auth.currentUser().lastName;
+          this.http.addReview(id, this.review).subscribe();
+        });
+      } else {
+        // validate all form fields
+      }
+    }
+
+    isFieldValid(field: string) {
+      return !this.form.get(field).valid && this.form.get(field).touched;
+    }
 
   getExpert(): void {
     this.route.params.subscribe(params => {
