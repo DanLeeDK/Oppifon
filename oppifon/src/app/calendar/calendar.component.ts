@@ -8,6 +8,7 @@ import { AuthorizationService } from '../shared/authorization.service';
 import { HttpService } from '../shared/http.service';
 import { User } from '../shared/models/Models';
 import { Calendar } from '../shared/models/Calendar';
+import { SimpleUser } from '../shared/models/simpleUser';
 
 const colors: any = {
   red: {
@@ -143,9 +144,14 @@ export class CalendarComponent implements OnInit {
   }
 
   addEvent(): void {
+    let simpleUser = new SimpleUser();
+    simpleUser.firstName = this.user.firstName;
+    simpleUser.lastName = this.user.lastName;
+    simpleUser.email = this.user.email;
     let myAppointment = new Appointment();
     myAppointment.title = this.appointment.title;
     myAppointment.text = this.appointment.text;
+    myAppointment.participants.push(simpleUser)
     myAppointment.maxParticipants = this.appointment.maxParticipants,
     myAppointment.startTime = this.appointment.startTime;
     myAppointment.endTime = this.appointment.endTime;
