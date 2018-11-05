@@ -17,7 +17,7 @@ export class MyCalendarComponent extends CalendarComponent implements OnInit{
     .subscribe(data => {
       this.userCalendar = data
       this.userCalendar.appointments.forEach(element => {
-        this.pushToLocalEventList(element, true);
+        super.pushToLocalEventList(element, true);
       });
     })
   }

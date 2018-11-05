@@ -9,7 +9,6 @@ import { HttpService } from '../shared/http.service';
 import { User } from '../shared/models/Models';
 import { Calendar } from '../shared/models/Calendar';
 import { SimpleUser } from '../shared/models/simpleUser';
-import { ActivatedRoute, ParamMap } from '@angular/router';
 
 const colors: any = {
   red: {
