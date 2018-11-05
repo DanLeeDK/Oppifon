@@ -1,0 +1,41 @@
+<ng-container *ngIf="expert$ | async as expert; else loading">
+  <h1>Review af {{expert.firstName}} {{expert.lastName}}</h1>
+
+  <div class="form-group green-border-focus col-8">
+    <div class="form-group">
+      <input [(ngModel)]="review.title" type="string" class="form-control" name="title" placeholder="Title">
+    </div>
+    <textarea [(ngModel)]="review.reviewText" class="form-control" id="exampleFormControlTextarea5" rows="3"
+      placeholder="Please write your review here"></textarea>
+    <div class="container form-group">
+      <label for="mainCatagoryMethod">Rating  <i class="grey-text mr-1"><i class="fa fa-lg fa-star"> </i></i></label>
+      <select name="mainCatagoryMethod" id="mainCatagoryMethod" class="form-control" [(ngModel)]="review.rating">
+        <option value="" disabled selected>Rate {{expert.firstName}}</option>
+        <option *ngFor="let option of ratings" [value]="option">{{ option }} </option>
+      </select>
+    </div>
+
+    <div class="container">
+      <span>Anonymous review?</span>
+      <div class="custom-control custom-radio">
+        <input [(ngModel)]="review.anonymity" type="radio" class="custom-control-input" id="defaultUnchecked" [value]=true
+          name="defaultExampleRadios">
+        <label class="custom-control-label" for="defaultUnchecked">Yes</label>
+      </div>
+
+      <div class="custom-control custom-radio">
+        <input [(ngModel)]="review.anonymity" type="radio" class="custom-control-input" id="defaultChecked" [value]=false
+          name="defaultExampleRadios" checked>
+        <label class="custom-control-label" for="defaultChecked">No</label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="d-flex flex-row-reverse">
+        <button (click)="onSubmit()" class="btn btn-primary" type="submit">Submit</button>
+      </div>
+    </div>
+  </div>
+</ng-container>
+
+<ng-template #loading>Loading...</ng-template>

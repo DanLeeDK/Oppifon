@@ -1,6 +1,6 @@
 import {SimpleUser} from '../models/simpleUser'
 
-export class WEBAppointment{
+export class Appointment{
     constructor(){
         this.title = "";
         this.text = "";
@@ -11,6 +11,7 @@ export class WEBAppointment{
         this.name = "";
         this.creatorId = "";
     }
+    id: string;
     title: string;
     text: string;
     maxParticipants: number;
@@ -21,13 +22,3 @@ export class WEBAppointment{
     creatorId: string;
     // participants    
   }
-
-export class APIAppointment{
-    time: Date;
-    duration: string;
-    text: string;
-    name: string;
-    creatorId: string;
-    maxParticipants: number;
-    // participants    
-}

@@ -6,8 +6,8 @@
 
         <form (ngSubmit)="onSubmit()" enctype="multipart/form-data">
           <div class="form-group">
-            <input  [(ngModel)]="user.firstName" required type="text" class="form-control"
-             name="firstName" #firstname="ngModel" placeholder="First name">
+            <input [(ngModel)]="user.firstName" required type="text" class="form-control" name="firstName" #firstname="ngModel"
+              placeholder="First name">
             <div *ngIf="firstName?.errors.required" class="alert alert-danger">
               First Name is required
             </div>
@@ -33,7 +33,8 @@
             </div>
           </div>
           <div class="form-group">
-            <input [(ngModel)]="user.confirmPassword" type="password" class="form-control" name="confirmPassword" placeholder="Confirm password">
+            <input [(ngModel)]="user.confirmPassword" type="password" class="form-control" name="confirmPassword"
+              placeholder="Confirm password">
             <div *ngIf="whoAreYouSubmit && confirmPassword?.errors?.MatchPassword" class="alert alert-danger">
               Passwords must match
             </div>
@@ -71,9 +72,9 @@
             </div>
           </div>
           <div class="form-group">
-            <input  [(ngModel)]="interest" type="string" name="interests" class="form-control" placeholder="Add your interests">
+            <input [(ngModel)]="interest" type="string" name="interests" class="form-control" placeholder="Add your interests">
             <div *ngIf="whoAreYouSubmit && interests?.invalid" class="alert alert-danger">
-                At least one interest is required
+              At least one interest is required
             </div>
           </div>
 
@@ -85,8 +86,8 @@
             </span>
 
             <div class="d-flex flex-row-reverse">
-                <button class="btn btn-success" type="button" (click)="addInterest()">Add interest</button>
-              </div>
+              <button class="btn btn-success" type="button" (click)="addInterest()">Add interest</button>
+            </div>
           </div>
 
           <h5 class="card-title">Are you an expert?</h5>
@@ -107,26 +108,46 @@
 
           <div *ngIf=user.isExpert>
             <h5 class="card-title">What kind of expert are you</h5>
-            <div class="form-group">
-              <input [(ngModel)]="user.expertCategory" type="string" class="form-control" name="expertCategory" placeholder="Category">
+            <div class="container form-group">
+              <label for="mainCatagoryMethod">Choose Main Catagory</label>
+              <select name="mainCatagoryMethod" id="mainCatagoryMethod" class="form-control" [(ngModel)]="user.expertCategory">
+                <option value="" disabled selected>Select Main Catagory</option>
+                <option *ngFor="let option of catagories" [value]="option">{{ option }}</option>
+              </select>
             </div>
             <div class="form-group">
-              <input type="string" class="form-control" name="expertSubCategory" placeholder="Sub category">
+              <input [(ngModel)]="mainField" type="string" class="form-control" name="expertMainField" placeholder="Add a main field">
             </div>
 
             <div class="form-group">
-                <span *ngFor="let interest of user.expertTags" class="badge badge-info">
-                  {{category}}
-                  <button type="button" class="btn btn-danger btn-sm" (click)="removeCategory(category)">X</button>
-                </span>
+              <span *ngFor="let mainfield of user.mainFields" class="badge badge-info">
+                {{mainfield}}
+                <button type="button" class="btn btn-danger btn-sm" (click)="removeMainField(mainfield)">X</button>
+              </span>
 
-                <div class="d-flex flex-row-reverse">
-                    <button class="btn btn-success" type="button" (click)="addCategory()">Add sub category</button>
-                  </div>
+              <div class="d-flex flex-row-reverse">
+                <button class="btn btn-success" type="button" (click)="addMainField()">Add main field</button>
               </div>
+            </div>
 
             <div class="form-group">
-              <textarea [(ngModel)]="user.description" type="string" class="form-control" name="description" placeholder="Type a description about your self"></textarea>
+              <input [(ngModel)]="subCatagory" type="string" class="form-control" name="expertSubCategory" placeholder="Sub category">
+            </div>
+
+            <div class="form-group">
+              <span *ngFor="let catagory of user.expertTags" class="badge badge-info">
+                {{category}}
+                <button type="button" class="btn btn-danger btn-sm" (click)="removeCategory(category)">X</button>
+              </span>
+
+              <div class="d-flex flex-row-reverse">
+                <button class="btn btn-success" type="button" (click)="addCategory()">Add sub category</button>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <textarea [(ngModel)]="user.description" type="string" class="form-control" name="description"
+                placeholder="Type a description about your self"></textarea>
             </div>
           </div>
           <div class="form-group">

@@ -39,7 +39,7 @@ export class SearchComponent implements OnInit {
 
   // TODO Should not be case sensitive
   filterCatagory(arr, searchKey) {
-    return arr.filter(obj => obj.catagory === searchKey );
+    return arr.filter(obj => obj.expertCategory === searchKey );
   }
 
   search() {

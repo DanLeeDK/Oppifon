@@ -24,6 +24,8 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthorizationService } from './shared/authorization.service';
 import { AuthInterceptor } from './shared/auth.interceptor';
+import { ReviewPageComponent } from './review-page/review-page.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,8 @@ import { AuthInterceptor } from './shared/auth.interceptor';
     SearchComponent,
     CalendarComponent,
     PageNotFoundComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    ReviewPageComponent
   ],
   imports: [
     MDBBootstrapModule.forRoot(),
@@ -47,6 +50,7 @@ import { AuthInterceptor } from './shared/auth.interceptor';
     HttpClientModule,
     AppRoutingModule,
     NgbModule,
+    MatProgressSpinnerModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     FlatpickrModule.forRoot(),

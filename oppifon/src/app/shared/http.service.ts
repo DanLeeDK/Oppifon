@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { User } from './models/Models';
-
+import { User, Review } from './models/Models';
+import { Appointment } from './models/appointment';
+import { Calendar } from './models/Calendar';
 @Injectable({
   providedIn: 'root'
 })
@@ -13,10 +14,6 @@ export class HttpService {
 
   apiUrl = 'http://localhost:51071/api/';
 
-  getUser() {
-    const url = `${this.apiUrl}getUser`;
-    return this.http.get<any>(url);
-  }
 
   getExperts(): Observable<User[]> {
     const url = `${this.apiUrl}Expert`;
@@ -33,4 +30,28 @@ export class HttpService {
     return this.http.get<any>(url);
   }
 
+  addReview(id: string, review: Review) {
+    const url = `${this.apiUrl}expert/${id}/review`;
+    return this.http.post(url, review);
+  }
+
+  getPrivateCalendar(userId: string): Observable<Calendar> {
+    const url = `${this.apiUrl}calendar/user/${userId}`
+    return this.http.get<Calendar>(url);
+  }
+
+  addAppointment(appointment: Appointment): Observable<any> {
+    const url = `${this.apiUrl}appointment`;
+    return this.http.post(url, appointment);
+  }
+
+  deleteAppointment(appointment: Appointment): Observable<any>{
+    const url = `${this.apiUrl}appointment/${appointment.id}`;
+    return this.http.delete(url);
+  }
+
+  removeUserFromAppointment(userId: string, appointment: Appointment): Observable<any>{
+    const url = `${this.apiUrl}appointment/${appointment.id}/participant/${userId}`;
+    return this.http.delete(url);
+  }
 }
