@@ -34,6 +34,8 @@ export class CalendarComponent implements OnInit {
 
   @ViewChild('modalContent')
   modalContent: TemplateRef<any>;
+  @ViewChild('errorContent')
+  errorContent: TemplateRef<any>;
   view: CalendarView = CalendarView.Month;
   CalendarView = CalendarView;
   viewDate: Date = new Date();
@@ -74,7 +76,7 @@ export class CalendarComponent implements OnInit {
 
   activeDayIsOpen: boolean = true;
 
-  constructor(private modal: NgbModal, private auth: AuthorizationService, private http: HttpService) {}
+  constructor(private modal: NgbModal, private errorModal: NgbModal, private auth: AuthorizationService, private http: HttpService) {}
 
   appointment: Appointment;
   calendar: Calendar
@@ -158,7 +160,7 @@ export class CalendarComponent implements OnInit {
     },
     data => {
       this.errorMessage = data.error.message;
-      this.showErrorMessage = true;
+      this.errorModal.open(this.errorContent, { size: 'lg' });
     });   
   }
 }
