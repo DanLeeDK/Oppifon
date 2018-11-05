@@ -11,6 +11,7 @@ export class Appointment{
         this.name = "";
         this.creatorId = "";
     }
+    id: string;
     title: string;
     text: string;
     maxParticipants: number;

@@ -45,4 +45,13 @@ export class HttpService {
     return this.http.post(url, appointment);
   }
 
+  deleteAppointment(appointment: Appointment): Observable<any>{
+    const url = `${this.apiUrl}appointment/${appointment.id}`;
+    return this.http.delete(url);
+  }
+
+  removeUserFromAppointment(userId: string, appointment: Appointment): Observable<any>{
+    const url = `${this.apiUrl}appointment/${appointment.id}/participant/${userId}`;
+    return this.http.delete(url);
+  }
 }

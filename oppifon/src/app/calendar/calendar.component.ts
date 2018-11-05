@@ -34,14 +34,12 @@ export class CalendarComponent implements OnInit {
 
   @ViewChild('modalContent')
   modalContent: TemplateRef<any>;
-
   view: CalendarView = CalendarView.Month;
-
   CalendarView = CalendarView;
-
   viewDate: Date = new Date();
-
   user: User;
+  errorMessage: string;
+  showErrorMessage: boolean;
 
   modalData: {
     action: string;
@@ -50,16 +48,22 @@ export class CalendarComponent implements OnInit {
 
     actions: CalendarEventAction[] = [
     {
-      label: '<i class="fa fa-fw fa-pencil"></i>',
-      onClick: ({ event }: { event: CalendarEvent }): void => {
-        this.handleEvent('Edited', event);
-      }
-    },
-    {
       label: '<i class="fa fa-fw fa-times"></i>',
       onClick: ({ event }: { event: CalendarEvent }): void => {
-        this.events = this.events.filter(iEvent => iEvent !== event);
-        this.handleEvent('Deleted', event);
+        
+        if(event.meta.creatorId == this.user.id) {
+          this.http.deleteAppointment(event.meta)
+          .subscribe(() => {
+            this.events = this.events.filter(iEvent => iEvent !== event);
+            this.handleEvent('Deleted', event);
+          })
+        } else {
+          this.http.removeUserFromAppointment(this.user.id ,event.meta)
+          .subscribe(() => {
+            this.events = this.events.filter(iEvent => iEvent !== event);
+            this.handleEvent('Deleted', event);
+          })
+        }
       }
     }
   ];
@@ -76,6 +80,7 @@ export class CalendarComponent implements OnInit {
   calendar: Calendar
 
   ngOnInit(){
+    this.showErrorMessage = false;
     this.appointment = new Appointment();
     this.user = this.auth.currentUser();
     this.http.getPrivateCalendar(this.user.id)
@@ -115,13 +120,14 @@ export class CalendarComponent implements OnInit {
   handleEvent(action: string, event: CalendarEvent): void {
     this.modalData = { event, action };
     this.modal.open(this.modalContent, { size: 'lg' });
+
   }
 
   private pushToLocalEventList(appointment: Appointment){
     this.events.push({
       title: appointment.title,
-      start: startOfDay(appointment.startTime),
-      end: endOfDay(appointment.endTime),
+      start: new Date(appointment.startTime),
+      end: new Date(appointment.endTime),
       color: colors.red,
       draggable: false,
       resizable: {
@@ -145,9 +151,14 @@ export class CalendarComponent implements OnInit {
     myAppointment.creatorId = this.user.id;
 
     this.http.addAppointment(myAppointment)
-    .subscribe(() => {
+    .subscribe(data => {
+      myAppointment.id = data;
       this.pushToLocalEventList(myAppointment);
       this.appointment = new Appointment();
+    },
+    data => {
+      this.errorMessage = data.error.message;
+      this.showErrorMessage = true;
     });   
   }
 }
