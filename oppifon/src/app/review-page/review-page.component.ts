@@ -23,7 +23,8 @@ export class ReviewPageComponent implements OnInit {
     this.form = fb.group({
       title: ['', Validators.required],
       reviewText: ['', Validators.required],
-      rating: ['', Validators.required]
+      rating: ['', Validators.required],
+      anonymity: [true, Validators.required]
     });
   }
 
@@ -32,12 +33,19 @@ export class ReviewPageComponent implements OnInit {
       this.review.anonymity = false;
     }
 
+    get title() { return this.form.get('title'); }
+
+get power() { return this.form.get('reviewText'); }
+
     onSubmit() {
       if (this.form.valid) {
         this.route.params.subscribe(params => {
           const id = params['id'];
           console.log('Adding review');
           this.review.name = this.auth.currentUser().firstName + ' ' + this.auth.currentUser().lastName;
+          this.review.title = this.title();
+          this.review.reviewText = this.power();
+          this.review.rating = 3;
           this.http.addReview(id, this.review).subscribe();
         });
       } else {
