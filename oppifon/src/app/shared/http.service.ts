@@ -40,6 +40,11 @@ export class HttpService {
     return this.http.get<Calendar>(url);
   }
 
+  getPublicCalendar(userId: string): Observable<Calendar> {
+    const url = `${this.apiUrl}calendar/expert/${userId}`
+    return this.http.get<Calendar>(url);
+  }
+
   addAppointment(appointment: Appointment): Observable<any> {
     const url = `${this.apiUrl}appointment`;
     return this.http.post(url, appointment);

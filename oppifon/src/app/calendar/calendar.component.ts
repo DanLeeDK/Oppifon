@@ -9,6 +9,7 @@ import { HttpService } from '../shared/http.service';
 import { User } from '../shared/models/Models';
 import { Calendar } from '../shared/models/Calendar';
 import { SimpleUser } from '../shared/models/simpleUser';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 
 const colors: any = {
   red: {
@@ -73,26 +74,22 @@ export class CalendarComponent implements OnInit {
 
   refresh: Subject<any> = new Subject();
 
-  events: CalendarEvent<Appointment>[] = [  ];
+  public events: CalendarEvent<Appointment>[] = [  ];
 
   activeDayIsOpen: boolean = true;
-
-  constructor(private modal: NgbModal, private errorModal: NgbModal, private auth: AuthorizationService, private http: HttpService) {}
+  getExpert: string;
+  
+  constructor(public modal: NgbModal, public errorModal: NgbModal, public auth: AuthorizationService, public http: HttpService) {
+    
+  }
 
   appointment: Appointment;
-  calendar: Calendar
+  userCalendar: Calendar
+  expertCalendar: Calendar;
 
   ngOnInit(){
     this.showErrorMessage = false;
     this.appointment = new Appointment();
-    this.user = this.auth.currentUser();
-    this.http.getPrivateCalendar(this.user.id)
-    .subscribe(data => {
-      this.calendar = data
-      this.calendar.appointments.forEach(element => {
-        this.pushToLocalEventList(element);
-      });
-    })
   }
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
@@ -126,18 +123,18 @@ export class CalendarComponent implements OnInit {
 
   }
 
-  private pushToLocalEventList(appointment: Appointment){
+  pushToLocalEventList(appointment: Appointment, yourEvent: boolean){
     this.events.push({
-      title: appointment.title,
+      title: (yourEvent ? appointment.title : "Private"),
       start: new Date(appointment.startTime),
       end: new Date(appointment.endTime),
-      color: colors.red,
+      color: (yourEvent ? colors.blue : colors.red),
       draggable: false,
       resizable: {
         beforeStart: false,
         afterEnd: false
       },
-      actions: this.actions,
+      actions: (yourEvent ? this.actions : []),
       meta: appointment
     });
     this.refresh.next();
@@ -161,7 +158,7 @@ export class CalendarComponent implements OnInit {
     this.http.addAppointment(myAppointment)
     .subscribe(data => {
       myAppointment.id = data;
-      this.pushToLocalEventList(myAppointment);
+      this.pushToLocalEventList(myAppointment, true);
       this.appointment = new Appointment();
     },
     data => {
