@@ -26,6 +26,8 @@ import { AuthorizationService } from './shared/authorization.service';
 import { AuthInterceptor } from './shared/auth.interceptor';
 import { ReviewPageComponent } from './review-page/review-page.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MyCalendarComponent } from './my-calendar/my-calendar.component';
+import { ExpertCalendarComponent } from './expert-calendar/expert-calendar.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,9 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     CalendarComponent,
     PageNotFoundComponent,
     ForgotPasswordComponent,
-    ReviewPageComponent
+    ReviewPageComponent,
+    MyCalendarComponent,
+    ExpertCalendarComponent
   ],
   imports: [
     MDBBootstrapModule.forRoot(),
