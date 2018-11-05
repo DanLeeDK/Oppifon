@@ -1,6 +1,7 @@
 import { ReviewPageComponent } from './review-page/review-page.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
-import { CalendarComponent } from './calendar/calendar.component';
+import { MyCalendarComponent } from './my-calendar/my-calendar.component';
+import { ExpertCalendarComponent } from './expert-calendar/expert-calendar.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
@@ -18,7 +19,8 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent},
   { path: 'signup', component: SignUpComponent },
   { path: 'forgot-password', component: ForgotPasswordComponent },
-  { path: 'calendar', component: CalendarComponent },
+  { path: 'calendar', component: MyCalendarComponent },
+  { path: 'calendar/:id', component: ExpertCalendarComponent},
   { path: 'search', component: SearchComponent },
   { path: 'expert/:id', component: ExpertProfileComponent},
   { path: 'review/:id', component: ReviewPageComponent},

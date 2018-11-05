@@ -12,6 +12,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class ExpertProfileComponent implements OnInit {
   public expert$: Observable<User>;
   public reviews = ['Super professional help', 'Really helped me a lot', 'Best talk ever!'];
+  public id: string;
   constructor(private router: Router, private http: HttpService, private route: ActivatedRoute) { }
 
   ngOnInit() {
@@ -20,13 +21,13 @@ export class ExpertProfileComponent implements OnInit {
 
   getExpert(): void {
   this.route.params.subscribe(params => {
-    const id = params['id'];
-    this.expert$ = this.http.getExpert(id);
+    this.id = params['id'];
+    this.expert$ = this.http.getExpert(this.id);
  });
 }
 
   calendarClick() {
-    this.router.navigate(['/calendar']);
+    this.router.navigate([`/calendar/${this.id}`]);
   }
 
   reviewClick() {
