@@ -33,19 +33,15 @@ export class ReviewPageComponent implements OnInit {
       this.review.anonymity = false;
     }
 
-    get title() { return this.form.get('title'); }
-
-get power() { return this.form.get('reviewText'); }
-
     onSubmit() {
       if (this.form.valid) {
         this.route.params.subscribe(params => {
           const id = params['id'];
           console.log('Adding review');
           this.review.name = this.auth.currentUser().firstName + ' ' + this.auth.currentUser().lastName;
-          this.review.title = this.title();
-          this.review.reviewText = this.power();
-          this.review.rating = 3;
+          this.review.title = this.form.get('title').value;
+          this.review.reviewText = this.form.get('reviewText').value;
+          this.review.rating = this.form.get('rating').value;
           this.http.addReview(id, this.review).subscribe();
         });
       } else {
