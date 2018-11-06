@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { User, Review } from './models/Models';
-import { Appointment } from './models/appointment';
+import { Appointment, DTOAppointment } from './models/appointment';
 import { Calendar } from './models/Calendar';
 @Injectable({
   providedIn: 'root'
@@ -40,9 +40,31 @@ export class HttpService {
     return this.http.get<Calendar>(url);
   }
 
-  addAppointment(appointment: Appointment): Observable<any> {
+  getPublicCalendar(userId: string): Observable<Calendar> {
+    const url = `${this.apiUrl}calendar/expert/${userId}`
+    return this.http.get<Calendar>(url);
+  }
+
+  addAppointment(appointment: DTOAppointment): Observable<any> {
+    let myAppointment = new Appointment();
+    myAppointment.title = appointment.title;
+    myAppointment.text = appointment.text;
+    myAppointment.participants = appointment.participants;
+    myAppointment.maxParticipants = appointment.maxParticipants,
+    myAppointment.startTime = appointment.startTime.toLocaleString();
+    myAppointment.endTime = appointment.endTime.toLocaleString();
+    myAppointment.name = appointment.name;
+    myAppointment.creatorId = appointment.creatorId;
+
     const url = `${this.apiUrl}appointment`;
-    return this.http.post(url, appointment);
+    return this.http.post(url, myAppointment);
+  }
+
+  addUserToAppointment(appointment: DTOAppointment, userId: string){
+    
+
+    const url = `${this.apiUrl}appointment/${appointment.id}/participant`;
+    return this.http.post(url, {id: userId});
   }
 
   deleteAppointment(appointment: Appointment): Observable<any>{
