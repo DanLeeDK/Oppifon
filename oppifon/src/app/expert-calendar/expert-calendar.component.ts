@@ -52,7 +52,7 @@ export class ExpertCalendarComponent implements OnInit {
   appointment: DTOAppointment;
   userCalendar: Calendar
   expertCalendar: Calendar;
-  isSignedIn: boolean = false;
+  isLoggedIn: boolean = false;
   modalData: {
     action: string;
     event: CalendarEvent;
@@ -87,17 +87,19 @@ export class ExpertCalendarComponent implements OnInit {
   ngOnInit(){
     this.showErrorMessage = false;
     this.appointment = new DTOAppointment();
-    this.user = this.auth.currentUser();
-    if(this.user){
-      this.isSignedIn = true;
-    }
-    this.http.getPrivateCalendar(this.user.id)
+    if(this.auth.isLoggedIn()){
+      this.user = this.auth.currentUser();
+      this.isLoggedIn = true;
+      this.http.getPrivateCalendar(this.user.id)
     .subscribe(data => {
       this.userCalendar = data
       this.userCalendar.appointments.forEach(element => {
         this.pushToLocalEventList(element, true);
       });
     })
+    } 
+    
+    
 
     // Get expert calendar
     this.route.params.subscribe(params => {
