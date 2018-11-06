@@ -92,10 +92,6 @@
       <textarea class="form-control" [(ngModel)]="appointment.text" name="text" placeholder="Text" type="text"></textarea>
     </div>
     <div class="form-group">
-      <input class="form-control" [(ngModel)]="appointment.maxParticipants" name="maxParticipants" placeholder="Max maxParticipants"
-        type="number">
-    </div>
-    <div class="form-group">
       <input class="form-control" type="text" mwlFlatpickr [(ngModel)]="appointment.startTime" (ngModelChange)="refresh.next()"
         [altInput]="true" [convertModelValue]="true" [enableTime]="true" dateFormat="Y-m-dTH:i" altFormat="F j, Y H:i"
         time_24hr="true" timeFormat="H:i">

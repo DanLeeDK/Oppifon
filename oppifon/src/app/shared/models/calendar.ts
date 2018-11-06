@@ -1,8 +1,8 @@
-import { Appointment } from './appointment';
+import { Appointment, DTOAppointment } from './appointment';
 
 export class Calendar{
     id: string;
-    appointments: Appointment[];
+    appointments: DTOAppointment[];
     daysOff: Date[];
     workDays: Date[];
 }
