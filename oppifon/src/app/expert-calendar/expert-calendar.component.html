@@ -84,7 +84,7 @@
     <br><br><br>
   
     <div class="clearfix"></div>
-    <div *ngIf="isSignedIn">
+    <div *ngIf="isLoggedIn; else other_content">
       <div class="form-group">
         <input class="form-control" [(ngModel)]="appointment.title" name="title" placeholder="Title" type="text">
       </div>
@@ -107,4 +107,7 @@
         </button>
       </div>
     </div>
+    <ng-template #other_content>
+      <p class="text-danger">You must be logged in to create an appointment.</p>
+    </ng-template>
   </div>
