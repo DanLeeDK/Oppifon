@@ -34,7 +34,7 @@ const colors: any = {
   templateUrl: './my-calendar.component.html',
   styleUrls: ['./my-calendar.component.scss']
 })
-export class MyCalendarComponent implements OnInit{
+export class MyCalendarComponent implements OnInit {
 
   @ViewChild('modalContent')
   modalContent: TemplateRef<any>;
@@ -48,9 +48,9 @@ export class MyCalendarComponent implements OnInit{
   showErrorMessage: boolean;
   refresh: Subject<any> = new Subject();
   events: CalendarEvent<DTOAppointment>[] = [  ];
-  activeDayIsOpen: boolean = true;  
+  activeDayIsOpen = true;
   appointment: DTOAppointment;
-  userCalendar: Calendar
+  userCalendar: Calendar;
   expertCalendar: Calendar;
   modalData: {
     action: string;
@@ -61,41 +61,39 @@ export class MyCalendarComponent implements OnInit{
     {
       label: '<i class="fa fa-fw fa-times"></i>',
       onClick: ({ event }: { event: CalendarEvent }): void => {
-        
-        if(event.meta.creatorId == this.user.id) {
+
+        if (event.meta.creatorId === this.user.id) {
           this.http.deleteAppointment(event.meta)
           .subscribe(() => {
             this.events = this.events.filter(iEvent => iEvent !== event);
             this.handleEvent('Deleted', event);
-          })
+          });
         } else {
-          this.http.removeUserFromAppointment(this.user.id ,event.meta)
+          this.http.removeUserFromAppointment(this.user.id, event.meta)
           .subscribe(() => {
             this.events = this.events.filter(iEvent => iEvent !== event);
             this.handleEvent('Deleted', event);
-          })
+          });
         }
       }
     }
   ];
 
-  constructor(private modal: NgbModal, private errorModal: NgbModal, private auth: AuthorizationService, private http: HttpService) {
-    
-  }
+  constructor(private modal: NgbModal, private errorModal: NgbModal, private auth: AuthorizationService, private http: HttpService) { }
 
-  ngOnInit(){
+  ngOnInit() {
     this.showErrorMessage = false;
     this.appointment = new DTOAppointment();
     this.user = this.auth.currentUser();
     this.http.getPrivateCalendar(this.user.id)
     .subscribe(data => {
-      this.userCalendar = data
+      this.userCalendar = data;
       this.userCalendar.appointments.forEach(element => {
         this.pushToLocalEventList(element, true);
       });
-    })
+    });
   }
- 
+
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
     if (isSameMonth(date, this.viewDate)) {
       this.viewDate = date;
@@ -127,9 +125,9 @@ export class MyCalendarComponent implements OnInit{
 
   }
 
-  pushToLocalEventList(appointment: DTOAppointment, yourEvent: boolean){
+  pushToLocalEventList(appointment: DTOAppointment, yourEvent: boolean) {
     this.events.push({
-      title: (yourEvent ? appointment.title : "Private"),
+      title: (yourEvent ? appointment.title : 'Private'),
       start: new Date(appointment.startTime),
       end: new Date(appointment.endTime),
       color: (yourEvent ? colors.blue : colors.red),
@@ -144,32 +142,31 @@ export class MyCalendarComponent implements OnInit{
     this.refresh.next();
   }
 
-  addPaticipantToEvent(user: SimpleUser, eventId: string, expertId: string): void{
-    
-    let appointmentIndex = this.events.findIndex(x => x.meta.id == eventId);
+  addPaticipantToEvent(user: SimpleUser, eventId: string, expertId: string): void {
+    const appointmentIndex = this.events.findIndex(x => x.meta.id === eventId);
     this.http.addUserToAppointment(this.events[appointmentIndex].meta, expertId)
     .subscribe(() => {
       this.events[appointmentIndex].meta.participants.push(user);
     }, data => {
       this.errorMessage = data.error;
       this.errorModal.open(this.errorContent, { size: 'lg' });
-    });      
+    });
   }
 
   addEvent(): void {
-    let simpleUser = new SimpleUser();
+    const simpleUser = new SimpleUser();
     simpleUser.firstName = this.user.firstName;
     simpleUser.lastName = this.user.lastName;
     simpleUser.email = this.user.email;
 
-    let myAppointment = new DTOAppointment();
+    const myAppointment = new DTOAppointment();
     myAppointment.title = this.appointment.title;
     myAppointment.text = this.appointment.text;
-    myAppointment.participants.push(simpleUser)
+    myAppointment.participants.push(simpleUser);
     myAppointment.maxParticipants = this.appointment.maxParticipants,
     myAppointment.startTime = this.appointment.startTime;
     myAppointment.endTime = this.appointment.endTime;
-    myAppointment.name = this.user.firstName + " " + this.user.lastName;
+    myAppointment.name = this.user.firstName + ' ' + this.user.lastName;
     myAppointment.creatorId = this.user.id;
 
     this.http.addAppointment(myAppointment)
@@ -181,6 +178,6 @@ export class MyCalendarComponent implements OnInit{
     data => {
       this.errorMessage = data.error.message;
       this.errorModal.open(this.errorContent, { size: 'lg' });
-    });   
+    });
   }
 }

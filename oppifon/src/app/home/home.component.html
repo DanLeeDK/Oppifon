@@ -3,33 +3,36 @@
   <h3>Experts</h3>
   <div class="container">
     <div class="row">
-      <div class="col-md-4" *ngFor="let profile of profiles">
-        <!--Carousel Wrapper-->
-        <mdb-carousel [isControls]="true" class="carousel-multi-item multi-animation" [type]="'carousel-multi-item'"
-          [animation]="'slide'">
-          <div id="carousel">
-            <!--slides-->
-            <div *ngFor="let expert of experts">
-              <mdb-carousel-item>
-                <div>
-                  <mdb-card>
-                    <mdb-card-img class="h-75" href="/expert/{{expert.id}}" src={{profile}} alt="Card image cap"></mdb-card-img>
-                    <mdb-card-body>
-                      <mdb-card-title>
-                        <h4>{{expert.firstName}} {{expert.lastName}}</h4>
-                      </mdb-card-title>
-                      <p>{{expert.description}}</p>
-                      <a href="/expert/{{expert.id}}" mdbBtn color="primary" class="waves-light" mdbWavesEffect>Read more</a>
-                    </mdb-card-body>
-                  </mdb-card>
-                </div>
-              </mdb-carousel-item>
+
+      <!-- Card deck -->
+      <div class="card-deck">
+          <!-- Card -->
+          <div *ngFor="let expert of experts" class="card mb-4">
+
+            <!--Card image-->
+            <div class="view overlay">
+              <img class="card-img-top" src={{profiles[2]}} alt="Card image cap">
+              <a href="#!">
+                <div class="mask rgba-white-slight"></div>
+              </a>
             </div>
+
+            <!--Card content-->
+            <div class="card-body elegant-color white-text rounded-bottom">
+
+              <!--Name-->
+              <h4 class="card-title">{{expert.firstName}} {{expert.lastName}}</h4>
+              <!--Description-->
+              <p class="card-text white-text mb-4">{{expert.description}}</p>
+              <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
+              <a href="/expert/{{expert.id}}" mdbBtn color="primary" class="waves-light" mdbWavesEffect>Read more</a>
+
+            </div>
+
           </div>
-          <!--/ slides -->
-        </mdb-carousel>
-        <!--/.Carousel Wrapper-->
+          <!-- Card -->
       </div>
+      <!-- Card deck -->
     </div>
     <ng-template #loading>
       <mat-spinner></mat-spinner>

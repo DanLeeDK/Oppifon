@@ -21,9 +21,14 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.getUser();
     this.http.getExperts().subscribe( data => {
-      this.experts = data;
+      const randomInt = this.randomNumber(data.length - 2);
+      this.experts = data.slice(randomInt, randomInt + 3);
     });
 
+  }
+
+  randomNumber(max) {
+      return Math.floor(Math.random() * (max));
   }
 
   getUser(): void {

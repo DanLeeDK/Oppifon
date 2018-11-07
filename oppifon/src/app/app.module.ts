@@ -28,6 +28,8 @@ import { ReviewPageComponent } from './review-page/review-page.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MyCalendarComponent } from './my-calendar/my-calendar.component';
 import { ExpertCalendarComponent } from './expert-calendar/expert-calendar.component';
+import { AuthGuard } from './guards/auth.guard';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +46,8 @@ import { ExpertCalendarComponent } from './expert-calendar/expert-calendar.compo
     ForgotPasswordComponent,
     ReviewPageComponent,
     MyCalendarComponent,
-    ExpertCalendarComponent
+    ExpertCalendarComponent,
+    ProfileComponent
   ],
   imports: [
     MDBBootstrapModule.forRoot(),
@@ -65,6 +68,7 @@ import { ExpertCalendarComponent } from './expert-calendar/expert-calendar.compo
   ],
   schemas: [NO_ERRORS_SCHEMA],
   providers: [
+    AuthGuard,
     AuthorizationService,
     {
       provide: HTTP_INTERCEPTORS,

@@ -20,6 +20,20 @@ export class HttpService {
     return this.http.get<any>(url);
   }
 
+  /* getThreeExperts(): User[] {
+    let users: User[];
+    this.getExperts().subscribe( data => {
+      const randomInt = this.randomNumber(data.length - 2);
+      users = data.slice(randomInt, randomInt + 3);
+    });
+    return users;
+  } */
+
+  getUser(id: string): Observable<User> {
+    const url = `${this.apiUrl}User/${id}`;
+    return this.http.get<any>(url);
+  }
+
   getExpert(id: string): Observable<User> {
     const url = `${this.apiUrl}Expert/${id}`;
     return this.http.get<any>(url);
@@ -61,7 +75,7 @@ export class HttpService {
   }
 
   addUserToAppointment(appointment: DTOAppointment, userId: string){
-    
+
 
     const url = `${this.apiUrl}appointment/${appointment.id}/participant`;
     return this.http.post(url, {id: userId});
