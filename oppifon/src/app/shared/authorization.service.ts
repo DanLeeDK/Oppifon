@@ -7,9 +7,10 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class AuthorizationService {
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router) { }
 
   apiUrl = 'http://localhost:51071/api/';
+  private localStorage = "megacorpworkout";
 
   register(user: User) {
     const url = `${this.apiUrl}account/register`;
@@ -30,7 +31,7 @@ export class AuthorizationService {
           console.log(data.token);
           if (data) {
             // store user details and jwt token in local storage to keep user logged in between page refreshes
-            localStorage.setItem('currentUser', JSON.stringify(data.token));
+            this.saveToken(data.token);
             callback(true);
           }
         },
@@ -54,7 +55,7 @@ export class AuthorizationService {
 
   logout() {
     // remove user from local storage to log user out
-    localStorage.removeItem('currentUser');
+    window.localStorage.removeItem(this.localStorage);
   }
 
 
@@ -68,25 +69,36 @@ export class AuthorizationService {
       user.firstName = payload.firstName;
       user.lastName = payload.lastName;
       if (payload.isExpert === 'True') {
-      user.isExpert = true;
-    } else {
-      user.isExpert = false;
-    }
+        user.isExpert = true;
+      } else {
+        user.isExpert = false;
+      }
       return user;
     } else {
       return;
     }
   }
 
-  isLoggedIn() {
-    if (localStorage.getItem('currentUser')) {
-      return true;
+  public isLoggedIn() {
+    const token = this.getToken();
+    if (token) {
+      const payload = JSON.parse(window.atob(token.split('.')[1]));
+      return payload.exp > Date.now() / 1000;
+    } else {
+      return false;
     }
-    return false;
-    }
+  }
 
-  getToken() {
-    return localStorage.getItem('currentUser');
+  public getToken() {
+    if (window.localStorage.getItem(this.localStorage)) {
+      return window.localStorage.getItem(this.localStorage);
+    } else {
+      return '';
+    }
+  }
+
+  private saveToken(token: string) {
+    window.localStorage.setItem(this.localStorage, token);
   }
 
 }
