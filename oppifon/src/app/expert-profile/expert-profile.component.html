@@ -1,4 +1,3 @@
-
 <ng-container *ngIf="expert$ | async as expert; else loading">
   <section class="my-5 fluid-container">
     <div class="card card-body">
@@ -44,11 +43,19 @@
       <div class="row">
         <div class="container col-sm card">
           <h5>
-            <a>Reviews</a>
+            <span>Reviews</span>
           </h5>
 
           <ul *ngFor="let review of expert?.reviews" class="list-group list-group-flush">
-            <li class="list-group-item"><label>{{review.rating}}<i class="grey-text mr-1"><i class="fa fa-lg fa-star"> </i></i></label>{{review.reviewText}}</li>
+            <div class="card">
+              <!-- Card content -->
+              <div class="card-body">
+                <!-- Title -->
+                <h4 class="card-title"><span>{{review.title}}</span></h4>
+                <!-- Text & rating-->
+                <p class="card-text">{{review.reviewText}} {{review.rating}}<i class="grey-text mr-1"><i class="fa fa-lg fa-star"></i></i></p>
+              </div>
+            </div>
           </ul>
           <button id="bookButton" (click)=reviewClick() mdbBtn type="button" color="success" class="waves-light"
             mdbWavesEffect>Review
@@ -60,7 +67,7 @@
         </div>
         <div class="container col-sm card">
           <h5>
-            <a>Main fields</a>
+            <span>Main fields</span>
           </h5>
           <ul class="list-group" *ngFor="let main of expert.mainFields">
             <li class="list-group-item">{{main}} <i class="fa fa-lg fa-heart"></i></li>
@@ -129,4 +136,6 @@
   </div>
 </ng-container>
 
-<ng-template #loading><mat-spinner></mat-spinner></ng-template>
+<ng-template #loading>
+  <mat-spinner></mat-spinner>
+</ng-template>
