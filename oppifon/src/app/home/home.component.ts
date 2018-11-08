@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { User } from '../shared/models/Models';
+import { SimpleUser } from '../shared/models/simpleUser';
 
 @Component({
   selector: 'app-home',
@@ -16,14 +17,16 @@ export class HomeComponent implements OnInit {
   public experts: User[];
   public profiles = ['assets/img/Dan.jpg', 'assets/img/Henrik.jpg', 'assets/img/Rasmus.jpg'];
   public appointments = ['appointment 1', 'appointment 2', 'appointment 3'];
+  public favorites: SimpleUser[];
 
   constructor(private router: Router, private auth: AuthorizationService, private http: HttpService) { }
   ngOnInit() {
-    this.getUser();
+    this.getUserData();
     this.http.getExperts().subscribe( data => {
       const randomInt = this.randomNumber(data.length - 2);
       this.experts = data.slice(randomInt, randomInt + 3);
     });
+
 
   }
 
@@ -31,8 +34,11 @@ export class HomeComponent implements OnInit {
       return Math.floor(Math.random() * (max));
   }
 
-  getUser(): void {
+  getUserData() {
       this.user = this.auth.currentUser();
+      this.auth.getFavorites().subscribe( data => {
+        this.favorites = data;
+      });
   }
 
   searchClick() {

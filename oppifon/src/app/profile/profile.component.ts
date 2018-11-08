@@ -14,19 +14,15 @@ export class ProfileComponent implements OnInit {
   public user: User;
   public id: string;
 
-  constructor(private router: Router, private http: HttpService, private route: ActivatedRoute, private auth: AuthorizationService) { }
+  constructor(
+    private router: Router,
+    private http: HttpService,
+    private route: ActivatedRoute,
+    private auth: AuthorizationService
+    ) { }
 
   ngOnInit() {
-    this.getUser();
-  }
-
-  getUser(): void {
-    this.route.params.subscribe(params => {
-      this.id = params['id'];
-      this.http.getExpert(this.id).subscribe( data => {
-        this.user = data;
-      });
-   });
+    this.user = this.auth.currentUser();
   }
 
   public onSubmit() {

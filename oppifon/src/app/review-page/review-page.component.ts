@@ -29,13 +29,12 @@ export class ReviewPageComponent implements OnInit {
       title: ['', Validators.required],
       reviewText: ['', Validators.required],
       rating: ['', Validators.required],
-      anonymity: [true, Validators.required]
+      anonymity: [false, Validators.required]
     });
   }
 
   ngOnInit() {
       this.getExpert();
-      this.review.anonymity = false;
     }
 
     onSubmit() {
@@ -47,8 +46,10 @@ export class ReviewPageComponent implements OnInit {
           this.review.title = this.form.get('title').value;
           this.review.reviewText = this.form.get('reviewText').value;
           this.review.rating = this.form.get('rating').value;
-          this.http.addReview(id, this.review).subscribe();
-          this.GoToExpertPage();
+          this.review.anonymity = this.form.get('anonymity').value;
+          this.http.addReview(id, this.review).subscribe( data => {
+            this.GoToExpertPage();
+          });
         });
       } else {
         // validate all form fields

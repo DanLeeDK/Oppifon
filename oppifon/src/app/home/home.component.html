@@ -94,9 +94,9 @@
           <a href="#" class="list-group-item active waves-effect disabled">
             Favorites
           </a>
-          <div *ngFor="let appointment of appointments">
+          <div *ngFor="let favorite of favorites">
             <a href="#" class="list-group-item list-group-item-action waves-effect">
-              {{appointment}}
+              {{favorite.firstName}}
             </a>
           </div>
         </div>

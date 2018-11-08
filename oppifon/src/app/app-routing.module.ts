@@ -24,7 +24,7 @@ const routes: Routes = [
   { path: 'calendar/:id', component: ExpertCalendarComponent},
   { path: 'search', component: SearchComponent },
   { path: 'expert/:id', component: ExpertProfileComponent},
-  { path: 'profile/:id', component: ProfileComponent},
+  { path: 'profile', component: ProfileComponent},
   { path: 'review/:id', component: ReviewPageComponent, canActivate: [AuthGuard]},
   { path: '', redirectTo: '/login', pathMatch: 'full'},
   { path: '**', component: PageNotFoundComponent}

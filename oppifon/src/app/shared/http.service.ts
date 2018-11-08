@@ -5,12 +5,13 @@ import { Observable } from 'rxjs';
 import { User, Review } from './models/Models';
 import { Appointment, DTOAppointment } from './models/appointment';
 import { Calendar } from './models/Calendar';
+import { AuthorizationService } from './authorization.service';
 @Injectable({
   providedIn: 'root'
 })
 export class HttpService {
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router, private auth: AuthorizationService) {}
 
   apiUrl = 'http://localhost:51071/api/';
 
@@ -20,14 +21,10 @@ export class HttpService {
     return this.http.get<any>(url);
   }
 
-  /* getThreeExperts(): User[] {
-    let users: User[];
-    this.getExperts().subscribe( data => {
-      const randomInt = this.randomNumber(data.length - 2);
-      users = data.slice(randomInt, randomInt + 3);
-    });
-    return users;
-  } */
+  addFavorite(idiot) {
+    const url = `${this.apiUrl}User/` + this.auth.currentUser().id + '/favorites';
+    return this.http.post(url, {id: idiot});
+  }
 
   getUser(id: string): Observable<User> {
     const url = `${this.apiUrl}User/${id}`;
@@ -50,17 +47,17 @@ export class HttpService {
   }
 
   getPrivateCalendar(userId: string): Observable<Calendar> {
-    const url = `${this.apiUrl}calendar/user/${userId}`
+    const url = `${this.apiUrl}calendar/user/${userId}`;
     return this.http.get<Calendar>(url);
   }
 
   getPublicCalendar(userId: string): Observable<Calendar> {
-    const url = `${this.apiUrl}calendar/expert/${userId}`
+    const url = `${this.apiUrl}calendar/expert/${userId}`;
     return this.http.get<Calendar>(url);
   }
 
   addAppointment(appointment: DTOAppointment): Observable<any> {
-    let myAppointment = new Appointment();
+    const myAppointment = new Appointment();
     myAppointment.title = appointment.title;
     myAppointment.text = appointment.text;
     myAppointment.participants = appointment.participants;
@@ -74,19 +71,19 @@ export class HttpService {
     return this.http.post(url, myAppointment);
   }
 
-  addUserToAppointment(appointment: DTOAppointment, userId: string){
+  addUserToAppointment(appointment: DTOAppointment, userId: string) {
 
 
     const url = `${this.apiUrl}appointment/${appointment.id}/participant`;
     return this.http.post(url, {id: userId});
   }
 
-  deleteAppointment(appointment: Appointment): Observable<any>{
+  deleteAppointment(appointment: Appointment): Observable<any> {
     const url = `${this.apiUrl}appointment/${appointment.id}`;
     return this.http.delete(url);
   }
 
-  removeUserFromAppointment(userId: string, appointment: Appointment): Observable<any>{
+  removeUserFromAppointment(userId: string, appointment: Appointment): Observable<any> {
     const url = `${this.apiUrl}appointment/${appointment.id}/participant/${userId}`;
     return this.http.delete(url);
   }
