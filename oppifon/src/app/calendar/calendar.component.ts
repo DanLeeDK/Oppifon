@@ -7,7 +7,7 @@ import { Appointment, DTOAppointment   } from '../shared/models/appointment';
 import { AuthorizationService } from '../shared/authorization.service';
 import { HttpService } from '../shared/http.service';
 import { User } from '../shared/models/Models';
-import { Calendar } from '../shared/models/Calendar';
+import { Calendar } from '../shared/models/calendar';
 import { SimpleUser } from '../shared/models/simpleUser';
 
 const colors: any = {

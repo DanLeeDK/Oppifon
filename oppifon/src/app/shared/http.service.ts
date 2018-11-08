@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { User, Review } from './models/Models';
 import { Appointment, DTOAppointment } from './models/appointment';
-import { Calendar } from './models/Calendar';
+import { Calendar } from './models/calendar';
 @Injectable({
   providedIn: 'root'
 })
