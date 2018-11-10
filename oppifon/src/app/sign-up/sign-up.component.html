@@ -4,7 +4,7 @@
       <div class="card-body text-left">
         <h5 class="card-title">Who are you?</h5>
 
-        <form (ngSubmit)="onSubmit()" [formGroup]="registerForm">
+        <form (ngSubmit)="onSubmit()" >
           <div class="form-group">
             <input class="form-control" formControlName="firstName" placeholder="First name">
             <div class="error" *ngIf="isFieldInvalid('firstName')">
@@ -93,19 +93,19 @@
           <div class="form-group">
             <div class="form-check form-check-inline">
               <label class="form-check-label">
-                <input [value]=false type="radio" formControlName="expert" class="form-check-input">
+                <input [(ngModel)]="form.controls.expert.value" type="radio" name="expert" [value]=false class="form-check-input">
                 No, skip
               </label>
             </div>
             <div class="form-check form-check-inline">
               <label class="form-check-label">
-                <input [value]=true type="radio" formControlName="expert" class="form-check-input">
+                <input [(ngModel)]="form.controls.expert.value" type="radio" name="expert" [value]=true class="form-check-input">
                 Yes, create my page
               </label>
             </div>
           </div>
 
-          <div *ngIf=registerForm.value.expert>
+          <div *ngIf=form.controls.expert.value>
             <h5 class="card-title">What kind of expert are you</h5>
             <div class="container form-group">
               <label for="mainCatagoryMethod">Choose Main Catagory</label>
@@ -115,7 +115,7 @@
               </select>
             </div>
             <div class="form-group">
-              <input [(ngModel)]="mainField" name="mainField" type="string" class="form-control" placeholder="Add a main field">
+              <input [(ngModel)]="mainField" type="string" class="form-control" name="expertMainField" placeholder="Add a main field">
             </div>
 
             <div class="form-group">

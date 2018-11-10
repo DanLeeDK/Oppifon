@@ -20,16 +20,11 @@ export class SignUpComponent implements OnInit {
   catagories: string[];
   interest: string;
   subCatagory: string;
-  mainField: string;
   category: string;
   mainFields: string[];
-
+  mainField: string;
   user: User;
-  private form;
-
-  get registerForm() {
-    return this.form;
-  }
+  form;
 
   get email() {
     return this.form.get('email');
@@ -71,7 +66,6 @@ export class SignUpComponent implements OnInit {
         expertCategory: [''],
         expertSubCategory: [''],
         description: [''],
-        mainField: ['']
       }, {
         validator: PasswordValidation.MatchPassword
       }
