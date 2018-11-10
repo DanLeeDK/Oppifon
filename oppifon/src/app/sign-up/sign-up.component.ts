@@ -1,10 +1,10 @@
-import { HttpService } from './../shared/http.service';
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { PasswordValidation } from './validation';
-import { User } from '../shared/models/Models';
-import { AuthorizationService } from '../shared/authorization.service';
-import { Router } from '@angular/router';
+import {HttpService} from './../shared/http.service';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, Validators, FormGroup, FormControl, Form} from '@angular/forms';
+import {PasswordValidation} from './validation';
+import {User} from '../shared/models/Models';
+import {AuthorizationService} from '../shared/authorization.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-sign-up',
@@ -22,29 +22,78 @@ export class SignUpComponent implements OnInit {
   subCatagory: string;
   mainField: string;
   category: string;
+  mainFields: string[];
 
   user: User;
+  private form;
+
+  get registerForm() {
+    return this.form;
+  }
+
+  get email() {
+    return this.form.get('email');
+  }
+
+  get password() {
+    return this.form.get('password');
+  }
+
+  get confirmPassword() {
+    return this.form.get('confirmPassword');
+  }
+
+
 
   constructor(
     private router: Router,
-    private authenticationService: AuthorizationService, private http: HttpService
+    private authenticationService: AuthorizationService,
+    private http: HttpService,
+    private fb: FormBuilder
   ) {
     this.user = new User();
     this.user.isExpert = false;
+    this.createFormValidation(fb);
+  }
+
+  private createFormValidation(fb: FormBuilder) {
+    this.form = fb.group({
+        firstName: ['', Validators.required],
+        email: ['', [Validators.required, Validators.email]],
+        password: ['', [Validators.required, Validators.minLength(8)]],
+        confirmPassword: ['', [Validators.required]],
+        city: ['', Validators.required],
+        phoneNumber: ['', Validators.required],
+        birthday: ['', Validators.required],
+        gender: ['male', Validators.required],
+        //category: [''],
+        expert: [false, Validators.required],
+        expertCategory: [''],
+        expertSubCategory: [''],
+        description: [''],
+        mainField: ['']
+      }, {
+        validator: PasswordValidation.MatchPassword
+      }
+    );
   }
 
   ngOnInit() {
-    this.http.getCategories().subscribe( data => {
-      this.catagories = data; });
+    this.http.getCategories().subscribe(data => {
+      this.catagories = data;
+    });
   }
 
+  isFieldInvalid(field: string) {
+    return !this.form.get(field).valid && this.form.get(field).touched;
+  }
 
   public addInterest() {
     if (this.interest !== '') {
       if (this.user.interestTags === undefined) {
         this.user.interestTags = [];
       }
-    this.user.interestTags.push(this.interest);
+      this.user.interestTags.push(this.interest);
     }
     this.interest = '';
   }
@@ -73,10 +122,10 @@ export class SignUpComponent implements OnInit {
 
   public addMainField() {
     if (this.mainField !== '') {
-      if (this.user.mainFields === undefined) {
-        this.user.mainFields = [];
+      if (this.mainFields === undefined) {
+        this.mainFields = [];
       }
-    this.user.mainFields.push(this.mainField);
+      this.mainFields.push(this.mainField);
     }
     this.mainField = '';
   }
@@ -90,19 +139,18 @@ export class SignUpComponent implements OnInit {
   public onSubmit() {
     this.whoAreYouSubmit = true;
 
-    if (this.user.password === this.user.confirmPassword) {
-      this.authenticationService.register(this.user).subscribe( data =>
-        this.authenticationService.login(this.user.email, this.user.password, result => {
-          if (result) {
-            console.log('Logged in ' + result);
-            this.router.navigate(['/home']);
-          } else {
-            console.log('not a valid user');
-          }
-        }));
-    }
+    this.authenticationService.register(this.user).subscribe(data =>
+      this.authenticationService.login(this.user.email, this.user.password, result => {
+        if (result) {
+          console.log('Logged in ' + result);
+          this.router.navigate(['/home']);
+        } else {
+          console.log('not a valid user');
+        }
+      }));
+
 
     console.log(this.user);
   }
-
 }
+
