@@ -17,12 +17,17 @@ export class SignUpComponent implements OnInit {
   passwordPattern = '^(?=.*d)(?=.*[a-z])(?=.*[A-Z])(?!.*s).{6,12}$';
   mobileNumberPattern = '^((\\+91-?)|0)?[0-9]{10}$';
   emailPattern = '^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$';
+
   catagories: string[];
-  interest: string;
-  subCatagory: string;
+  interestTags: string[];
+  interestTag: string;
+  expertTags: string[];
+  expertTag: string;
   category: string;
   mainFields: string[];
   mainField: string;
+  description: string;
+
   user: User;
   form;
 
@@ -39,7 +44,6 @@ export class SignUpComponent implements OnInit {
   }
 
 
-
   constructor(
     private router: Router,
     private authenticationService: AuthorizationService,
@@ -54,6 +58,7 @@ export class SignUpComponent implements OnInit {
   private createFormValidation(fb: FormBuilder) {
     this.form = fb.group({
         firstName: ['', Validators.required],
+        lastName: ['', Validators.required],
         email: ['', [Validators.required, Validators.email]],
         password: ['', [Validators.required, Validators.minLength(8)]],
         confirmPassword: ['', [Validators.required]],
@@ -61,11 +66,9 @@ export class SignUpComponent implements OnInit {
         phoneNumber: ['', Validators.required],
         birthday: ['', Validators.required],
         gender: ['male', Validators.required],
+        interest: ['', Validators.required],
         //category: [''],
         expert: [false, Validators.required],
-        expertCategory: [''],
-        expertSubCategory: [''],
-        description: [''],
       }, {
         validator: PasswordValidation.MatchPassword
       }
@@ -83,13 +86,13 @@ export class SignUpComponent implements OnInit {
   }
 
   public addInterest() {
-    if (this.interest !== '') {
-      if (this.user.interestTags === undefined) {
-        this.user.interestTags = [];
+    if (this.form.controls.interest.value !== '') {
+      if (this.interestTags === undefined) {
+        this.interestTags = [];
       }
-      this.user.interestTags.push(this.interest);
+      this.interestTags.push(this.form.controls.interest.value);
     }
-    this.interest = '';
+    this.form.controls.interest.value = '';
   }
 
   public removeInterest(interestToRemove: string) {
@@ -98,20 +101,20 @@ export class SignUpComponent implements OnInit {
     this.user.interestTags.splice(index, 1);
   }
 
-  public addCategory() {
-    if (this.category !== '') {
-      if (this.user.expertTags === undefined) {
-        this.user.expertTags = [];
+  public addExpertTag() {
+    if (this.expertTag !== '') {
+      if (this.expertTags === undefined) {
+        this.expertTags = [];
       }
-      this.user.expertTags.push(this.subCatagory);
+      this.expertTags.push(this.expertTag);
     }
-    this.subCatagory = '';
+    this.expertTag = '';
   }
 
-  public removeCategory(categoryToRemove: string) {
-    const category = this.user.expertTags.find(x => x === categoryToRemove);
-    const index = this.user.expertTags.indexOf(category);
-    this.user.expertTags.splice(index, 1);
+  public removeExpertTag(tagToRemove: string) {
+    const tag = this.expertTags.find(x => x === tagToRemove);
+    const index = this.expertTags.indexOf(tag);
+    this.expertTags.splice(index, 1);
   }
 
   public addMainField() {
@@ -125,9 +128,9 @@ export class SignUpComponent implements OnInit {
   }
 
   public removeMainField(mainFieldToRemove: string) {
-    const mainField = this.user.mainFields.find(x => x === mainFieldToRemove);
-    const index = this.user.mainFields.indexOf(mainField);
-    this.user.mainFields.splice(index, 1);
+    const mainField = this.mainFields.find(x => x === mainFieldToRemove);
+    const index = this.mainFields.indexOf(mainField);
+    this.mainFields.splice(index, 1);
   }
 
   public onSubmit() {
