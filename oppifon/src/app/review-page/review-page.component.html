@@ -5,14 +5,14 @@
     <div class="col-6 form-horizontal">
       <div class="form-group">
         <input class="form-control" formControlName="title" placeholder="Title">
-        <div class="error" *ngIf="isFieldValid('title')">
+        <div class="error" *ngIf="isFieldInvalid('title')">
           Please enter a title
         </div>
       </div>
 
       <div class="form-group">
         <textarea class="form-control" formControlName="reviewText" rows="3" placeholder="Please write your review here"></textarea>
-        <div class="error" *ngIf="isFieldValid('reviewText')">
+        <div class="error" *ngIf="isFieldInvalid('reviewText')">
           Please enter write review
         </div>
       </div>
@@ -23,7 +23,7 @@
           <option value="" disabled selected>Rate {{expert.firstName}}</option>
           <option *ngFor="let option of ratings" [value]="option">{{ option }} </option>
         </select>
-        <div class="error" *ngIf="isFieldValid('rating')">
+        <div class="error" *ngIf="isFieldInvalid('rating')">
           Please give a rating
         </div>
       </div>

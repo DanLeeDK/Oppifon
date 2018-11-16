@@ -24,14 +24,21 @@ export class HomeComponent implements OnInit {
     this.getUserData();
     this.http.getExperts().subscribe( data => {
       const randomInt = this.randomNumber(data.length - 2);
-      this.experts = data.slice(randomInt, randomInt + 3);
+      this.experts = this.shortenDescription(data.slice(randomInt, randomInt + 3));
     });
-
-
   }
 
   randomNumber(max) {
       return Math.floor(Math.random() * (max));
+  }
+
+  shortenDescription(experts: User[]) {
+    experts.forEach(element => {
+      if (element.description.length > 50) {
+        element.description = element.description.slice(0, 100) + '...';
+      }
+    });
+    return experts;
   }
 
   getUserData() {

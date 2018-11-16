@@ -21,14 +21,24 @@ export class HttpService {
     return this.http.get<any>(url);
   }
 
-  addFavorite(idiot) {
+  addFavorite(expert) {
     const url = `${this.apiUrl}User/` + this.auth.currentUser().id + '/favorites';
-    return this.http.post(url, {id: idiot});
+    return this.http.post(url, {id: expert});
   }
 
   getUser(id: string): Observable<User> {
     const url = `${this.apiUrl}User/${id}`;
     return this.http.get<any>(url);
+  }
+
+  sendPassword(email: string) {
+    const url = `${this.apiUrl}User/forgotpassword`;
+    return this.http.post<any>(url, {id: email});
+  }
+
+  addProfilePicture(fd: FormData) {
+    const url = `${this.apiUrl}Account/AddProfilePicture/` + this.auth.currentUser().id;
+    return this.http.post(url, fd);
   }
 
   getExpert(id: string): Observable<User> {
@@ -72,8 +82,6 @@ export class HttpService {
   }
 
   addUserToAppointment(appointment: DTOAppointment, userId: string) {
-
-
     const url = `${this.apiUrl}appointment/${appointment.id}/participant`;
     return this.http.post(url, {id: userId});
   }

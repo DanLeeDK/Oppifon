@@ -54,6 +54,9 @@
                 <!-- Text & rating-->
                 <p class="card-text">{{review.reviewText}} {{review.rating}}<i class="grey-text mr-1"><i class="fa fa-lg fa-star"></i></i></p>
               </div>
+              <div *ngIf=!review.anonymity>
+              <h6 class="card-title"><span>- {{review.name}}</span></h6>
+            </div>
             </div>
           </ul>
           <button id="bookButton" (click)=reviewClick() mdbBtn type="button" color="success" class="waves-light"
