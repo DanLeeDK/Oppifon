@@ -23,7 +23,7 @@ export class User {
   mainFields: string[];
   description: string;
   reviews: Review[];
-  Image: any;
+  image: string;
 }
 
 export class Id {
