@@ -2,7 +2,6 @@ import { Router } from '@angular/router';
 import { User, SimpleUser } from './models/Models';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 @Injectable()

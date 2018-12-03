@@ -1,8 +1,7 @@
 import { HttpService } from './../shared/http.service';
 import { Router } from '@angular/router';
-import { AuthorizationService } from './../shared/authorization.service';
 import { Component, OnInit } from '@angular/core';
-import { UserCredentials, User } from '../shared/models/Models';
+import {  User } from '../shared/models/Models';
 
 @Component({
   selector: 'app-login',
@@ -12,13 +11,22 @@ import { UserCredentials, User } from '../shared/models/Models';
 export class LoginComponent implements OnInit {
   public title = 'Welcome to Oppifon';
   public experts: User[];
-  public profiles = ['assets/img/Dan.jpg', 'assets/img/Henrik.jpg', 'assets/img/Rasmus.jpg'];
-  constructor(private service: AuthorizationService, private router: Router, private http: HttpService) { }
+  public profiles = [
+    'assets/img/Dan.jpg',
+    'assets/img/Henrik.jpg',
+    'assets/img/Rasmus.jpg'
+  ];
+  constructor(
+    private router: Router,
+    private http: HttpService
+  ) {}
 
   ngOnInit() {
-    this.http.getExperts().subscribe( data => {
+    this.http.getExperts().subscribe(data => {
       const randomInt = this.randomNumber(data.length - 2);
-      this.experts = this.shortenDescription(data.slice(randomInt, randomInt + 3));
+      this.experts = this.shortenDescription(
+        data.slice(randomInt, randomInt + 3)
+      );
     });
   }
 
@@ -32,8 +40,18 @@ export class LoginComponent implements OnInit {
   }
 
   randomNumber(max) {
-    return Math.floor(Math.random() * (max));
-}
+    return Math.floor(Math.random() * max);
+  }
+
+  expertClick(id: string) {
+    if (true) {
+      this.router.navigate(['/expert', id]);
+    }
+  }
+
+  searchClick() {
+    this.router.navigate(['/search']);
+  }
 
   signupClick() {
     this.router.navigate(['/signup']);

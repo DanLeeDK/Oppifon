@@ -23,8 +23,8 @@
 
                 <!--Card image-->
                 <div class="view overlay">
-                  <img class="card-img-top" src={{profiles[2]}} alt="Card image cap">
-                  <a href="#!">
+                  <img class="card-img-top" src={{expert.image}} alt="Card image cap">
+                  <a (click)=expertClick(expert.id)>
                     <div class="mask rgba-white-slight"></div>
                   </a>
                 </div>
@@ -37,7 +37,7 @@
                   <!--Description-->
                   <p class="card-text white-text mb-4">{{expert.description}}</p>
                   <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
-                  <a href="/expert/{{expert.id}}" mdbBtn color="primary" class="waves-light" mdbWavesEffect>Read more</a>
+                  <a (click)=expertClick(expert.id) mdbBtn color="primary" class="waves-light" mdbWavesEffect>Read more</a>
 
                 </div>
 
@@ -47,7 +47,7 @@
           <!-- Card deck -->
         </div>
           <!-- Card -->
-      <a href="/search" mdbBtn color="default" class="waves-light" mdbWavesEffect>Search expert</a>
+      <a (click)=searchClick() mdbBtn color="default" class="waves-light" mdbWavesEffect>Search expert</a>
     </div>
 
   </div>

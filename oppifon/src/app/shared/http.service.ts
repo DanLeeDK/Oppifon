@@ -6,9 +6,7 @@ import { User, Review } from './models/Models';
 import { Appointment, DTOAppointment } from './models/appointment';
 import { Calendar } from './models/Calendar';
 import { AuthorizationService } from './authorization.service';
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class HttpService {
 
   constructor(private http: HttpClient, private router: Router, private auth: AuthorizationService) {}
