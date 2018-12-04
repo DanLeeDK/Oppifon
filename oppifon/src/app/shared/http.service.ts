@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { User, Review } from './models/Models';
+import { User, Review, SimpleUser } from './models/Models';
 import { Appointment, DTOAppointment } from './models/appointment';
 import { Calendar } from './models/Calendar';
 import { AuthorizationService } from './authorization.service';
@@ -22,6 +22,11 @@ export class HttpService {
   addFavorite(expert) {
     const url = `${this.apiUrl}User/` + this.auth.currentUser().id + '/favorites';
     return this.http.post(url, {id: expert});
+  }
+
+  public getFavorites(): Observable<SimpleUser[]> {
+    const url = `${this.apiUrl}User/` + this.auth.currentUser().id + '/favorites';
+    return this.http.get<any>(url);
   }
 
   getUser(id: string): Observable<User> {

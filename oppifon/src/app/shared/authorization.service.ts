@@ -79,11 +79,6 @@ export class AuthorizationService {
     }
   }
 
-  public getFavorites(): Observable<SimpleUser[]> {
-    const url = `${this.apiUrl}User/` + this.currentUser().id + '/favorites';
-    return this.http.get<any>(url);
-  }
-
   public isLoggedIn() {
     const token = this.getToken();
     if (token) {

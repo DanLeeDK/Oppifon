@@ -1,16 +1,14 @@
-import { HttpService } from "./../shared/http.service";
-import { HttpClient } from "@angular/common/http";
-import { AuthorizationService } from "./../shared/authorization.service";
-import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
-import { Observable } from "rxjs";
-import { User } from "../shared/models/Models";
-import { SimpleUser } from "../shared/models/simpleUser";
+import { HttpService } from './../shared/http.service';
+import { AuthorizationService } from './../shared/authorization.service';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { User } from '../shared/models/Models';
+import { SimpleUser } from '../shared/models/simpleUser';
 
 @Component({
-  selector: "app-home",
-  templateUrl: "./home.component.html",
-  styleUrls: ["./home.component.scss"]
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
   public user: User;
@@ -53,7 +51,7 @@ export class HomeComponent implements OnInit {
 
   getUserData() {
     this.user = this.auth.currentUser();
-    this.auth.getFavorites().subscribe(data => {
+    this.http.getFavorites().subscribe(data => {
       this.favorites = data;
     });
   }
