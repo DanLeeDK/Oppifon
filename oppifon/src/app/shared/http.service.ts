@@ -4,18 +4,14 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { User, Review } from './models/Models';
 import { Appointment, DTOAppointment } from './models/appointment';
-<<<<<<< HEAD
-import { Calendar } from './models/Calendar';
+import { Calendar } from './models/calendar';
 import { AuthorizationService } from './authorization.service';
 import { SimpleUser } from './models/simpleUser';
 @Injectable()
-=======
-import { Calendar } from './models/calendar';
-@Injectable({
-  providedIn: 'root'
-})
->>>>>>> 483a8c12d068a9fcf6f78eb78a60268b808db4bc
+
 export class HttpService {
+  constructor(private http: HttpClient, private router: Router, private auth: AuthorizationService) {}
+
   constructor(private http: HttpClient, private router: Router, private auth: AuthorizationService) {}
 
   apiUrl = 'http://localhost:51071/api/';
