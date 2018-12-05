@@ -1,7 +1,5 @@
 import { HttpService } from './../shared/http.service';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { PasswordValidation } from './validation';
 import { User } from '../shared/models/Models';
 import { AuthorizationService } from '../shared/authorization.service';
 import { Router } from '@angular/router';
@@ -13,12 +11,8 @@ import { Router } from '@angular/router';
 })
 export class SignUpComponent implements OnInit {
   whoAreYouSubmit = false;
-
-  passwordPattern = '^(?=.*d)(?=.*[a-z])(?=.*[A-Z])(?!.*s).{6,12}$';
-  mobileNumberPattern = '^((\\+91-?)|0)?[0-9]{10}$';
-  emailPattern = '^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$';
   catagories: string[];
-  interest: string;
+  interestTag: string;
   subCatagory: string;
   mainField: string;
   category: string;
@@ -40,13 +34,13 @@ export class SignUpComponent implements OnInit {
 
 
   public addInterest() {
-    if (this.interest !== '') {
+    if (this.interestTag !== '') {
       if (this.user.interestTags === undefined) {
         this.user.interestTags = [];
       }
-    this.user.interestTags.push(this.interest);
+      this.user.interestTags.push(this.interestTag);
     }
-    this.interest = '';
+    this.interestTag = '';
   }
 
   public removeInterest(interestToRemove: string) {
@@ -76,7 +70,7 @@ export class SignUpComponent implements OnInit {
       if (this.user.mainFields === undefined) {
         this.user.mainFields = [];
       }
-    this.user.mainFields.push(this.mainField);
+      this.user.mainFields.push(this.mainField);
     }
     this.mainField = '';
   }
